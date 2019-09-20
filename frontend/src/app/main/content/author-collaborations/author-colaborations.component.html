@@ -24,8 +24,15 @@
           <mat-icon class="secondary-text">search</mat-icon>
         </label>
         <mat-form-field floatPlaceholder="never" fxFlex="1 0 auto">
-          <input id="search"  [formControl]="filterTextControl" matInput placeholder="Autor a consultar">
+          <input id="search" [formControl]="filterTextControl" matInput placeholder="Autor a consultar">
         </mat-form-field>
+
+        <mat-radio-group aria-label="Select an option">
+          <mat-radio-button value="1" color="warm">ISSN</mat-radio-button>
+          <mat-radio-button value="2">Author 2</mat-radio-button>
+        </mat-radio-group>
+
+
       </div>
       <!-- / SEARCH -->
 
@@ -35,10 +42,24 @@
     </div>
     <!-- / HEADER -->
 
-    <!-- CONTENT CARD -->
+    <!-- CONTENT CARD [CODE HERE]  -->
     <div class="content-card mat-white-bg">
 
-      mostrar resultados aca
+      <mat-chip-list aria-label="Fish selection">
+        <mat-chip *ngFor="let item of resultList">
+          {{ item.name }}
+        </mat-chip>
+        <!-- <mat-chip>Two fish</mat-chip>
+            <mat-chip color="primary" selected>Primary fish</mat-chip>
+            <mat-chip color="accent" selected>Accent fish</mat-chip> -->
+      </mat-chip-list>
+
+
+
+      <!-- <div *ngFor="let item of resultList">
+        <span>Nombre: {{ item.author }} </span>
+        <span>otra: {{ item.name }} ===> {{ item.cantidad}} </span>
+      </div> -->
 
     </div>
     <!-- / CONTENT CARD -->
