@@ -4,7 +4,10 @@ export const locale = {
         'NAV': {
             REPORTS: {
                 self: 'Colaboracion SELF',
-                AUTHOR_COLLABORATIONS: 'Authors Collaborations'
+                AUTHOR_COLLABORATIONS: 'Authors Collaborations',
+                AUTHORS_CHARACTERISATION: 'Authors characterisation',
+                INSTITUTIONS_ACTIVITY_CHARACTERISATION: 'Institutions Caracterisation',
+                JOURNALS_CHARACTERISATION: 'Journals characterisation'
             }
         }
     }

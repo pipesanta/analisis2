@@ -11,13 +11,7 @@ import { FuseSplashScreenService } from './core/services/splash-screen.service';
 import { FuseConfigService } from './core/services/config.service';
 import { FuseNavigationService } from './core/components/navigation/navigation.service';
 import { TranslateModule } from '@ngx-translate/core';
-// import { keycloakInitializer } from './auth/keycloakInitializer';
-// import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
-import { AppAuthGuard } from './auth/appAuthGuard.service';
-import { ApolloModule, Apollo } from 'apollo-angular';
-import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { CustomMatPaginatorIntl } from './core/custom-mat-paginator-intl/custom-mat-paginator-intl';
-import { GatewayService } from './api/gateway.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { MatPaginatorIntl } from '@angular/material';
 import { environment } from '../environments/environment';
@@ -32,6 +26,18 @@ const appRoutes: Routes = [
   {
     path: 'author-collaborations',
     loadChildren: './main/content/author-collaborations/author-collaborations.module#AuthorCollaborationsModule'
+  },
+  {
+    path: 'authors-characterisation',
+    loadChildren: './main/content/authors-characterisation/authors-characterisation.module#AuthorsCharacterisationModule'
+  },
+  {
+    path: 'institutions-activity-characterisation',
+    loadChildren: './main/content/institutions-activity-characterisation/institutions-activity-characterisation.module#InstitutionsActivityCharacterisationModule'
+  },
+  {
+    path: 'journals-characterisation',
+    loadChildren: './main/content/journals-characterisation/journals-characterisation.module#JournalsCharacterisationModule'
   },
   {
     path: '**',
@@ -49,9 +55,6 @@ const appRoutes: Routes = [
     SharedModule,
     TranslateModule.forRoot(),
     FuseMainModule,
-    // KeycloakAngularModule,
-    ApolloModule,
-    HttpLinkModule,
     ServiceWorkerModule.register('/emi/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
@@ -61,15 +64,7 @@ const appRoutes: Routes = [
     },
     FuseSplashScreenService,
     FuseConfigService,
-    FuseNavigationService,
-    AppAuthGuard,
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: keycloakInitializer,
-    //   multi: true,
-    //   deps: [KeycloakService]
-    // },
-    GatewayService,
+    FuseNavigationService
   ],
   bootstrap: [AppComponent]
 })

@@ -7,12 +7,12 @@ import { HttpClient } from '@angular/common/http';
 
 
 @Injectable()
-export class AuthorColaborationsService {
+export class AuthorsCharacterisationService {
   constructor(
     private httpClient: HttpClient
     ) {}
 
-  getArticlesByAuthor$(filterText: string){
+    getAnyInfoToTest$(filterText: string){
     return from(PART_O1)
     .pipe(
       // filter(article => (article.name.toUpperCase()).includes(filterText.toUpperCase()))

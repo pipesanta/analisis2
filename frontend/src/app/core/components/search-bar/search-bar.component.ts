@@ -34,7 +34,6 @@ export class FuseSearchBarComponent implements OnInit, OnDestroy {
     private fuseConfig: FuseConfigService,
     private translationLoader: FuseTranslationLoaderService,
     private searchBarService: SearchBarService,
-    // private keycloakService: KeycloakService
   ) {
     this.translationLoader.loadTranslations(english, spanish);
     this.collapsed = true;
@@ -46,65 +45,6 @@ export class FuseSearchBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.userRoles = this.keycloakService.getUserRoles(true);
-    // of(this.keycloakService.getUserRoles(true).includes('PLATFORM-ADMIN'))
-    //   .pipe(
-    //     // tap(ispa => console.log('IS PLATFORM ADMIN ==> ', ispa)),
-    //     delay(500),
-    //     mergeMap((isSysAdmin: boolean) => isSysAdmin
-    //       ? of({})
-    //         .pipe(
-    //           delay(50),
-    //           mergeMap(() => this.buildBusinessResponse$(
-    //             this.ALL_BUSINESS_REF.id,
-    //             this.translationLoader.getTranslate().instant(this.ALL_BUSINESS_REF.name)
-    //             )
-    //           )
-    //         )
-    //       : this.searchBarService.getUserBusiness$()
-    //         .pipe(
-    //           // tap(r => console.log('################ MY BUSINESS IS => ', r)),
-    //           catchError(error => defer(() => this.keycloakService.loadUserProfile())
-    //             .pipe(
-    //               // tap(ud => console.log(error, 'USER DETAILS ==> ', ud)),
-    //               mergeMap((userDetails: any) =>
-    //                 this.buildBusinessResponse$(
-    //                   userDetails['attributes']['businessId'][0],
-    //                   this.translationLoader.getTranslate().instant('TOOLBAR.MY_BUSINESS')
-    //                 )
-    //               )
-    //             ))
-    //         )
-    //     ),
-    //     // filter(result => result && !result.erros),
-    //     // tap(r => console.log('FOUND BUSINESS =>', r) ),
-    //     map(rawResponse => (rawResponse ? rawResponse.data.myBusiness : null)),
-    //     filter(result => result !== null),
-    //     map(response => ({
-    //       id: response._id,
-    //       name: response.generalInfo.name,
-    //       attributes: response.attributes
-    //     })),
-    //     tap( bu => this.selectedBU = bu),
-    //     map(bu => this.onBusinessSelected.next(bu))
-    //   )
-    //   .subscribe(r => {}, e => console.log(e), () => {});
-
-    // this.businessQueryFiltered$ = fromEvent(this.inputFilter.nativeElement, 'keyup')
-    //   .pipe(
-    //     startWith(''),
-    //     debounceTime(500),
-    //     distinctUntilChanged(),
-    //     mergeMap(() => this.getBusinessFiltered$(this.inputFilter.nativeElement.value)),
-    //     catchError(error => defer(() => this.keycloakService.loadUserProfile())
-    //       .pipe(
-    //         map((userDetails: any) => ([{
-    //           id: userDetails['attributes']['businessId'] ?  userDetails['attributes']['businessId'][0] : null,
-    //           name: this.translationLoader.getTranslate().instant('TOOLBAR.MY_BUSINESS'),
-    //           attributes: []
-    //         }]))
-    //       ))
-    //   );
   }
 
   ngOnDestroy() {
@@ -134,10 +74,6 @@ export class FuseSearchBarComponent implements OnInit, OnDestroy {
     }
   }
 
-  // search(event) {
-  //   const value = event.target.value;
-  //   this.onInput.emit(value);
-  // }
 
   onSelectBusinessEvent(business) {
     this.onBusinessSelected.emit(business);
@@ -149,25 +85,7 @@ export class FuseSearchBarComponent implements OnInit, OnDestroy {
   }
 
   getBusinessFiltered$(filterText: string): Observable<any[]> {
-    // return of(this.keycloakService.getUserRoles(true).includes('PLATFORM-ADMIN'))
-    //   .pipe(
-    //     filter(platformAdmin => platformAdmin),
-    //     mergeMap(() => this.searchBarService.getFilteredBusinessList$(filterText, 10)),
-    //     filter((resp: any) => !resp.errors),
-    //     map(result => result.data.getBusinesses),
-    //     mergeMap(results =>
-    //       from(results).pipe(
-    //         map((bu: any) => ({ id: bu._id, name: bu.generalInfo.name, attributes: bu.attributes })),
-    //         toArray()
-    //       )
-    //     ),
-    //     map(response => ([...response, {
-    //       id: this.ALL_BUSINESS_REF.id,
-    //       name: this.translationLoader.getTranslate().instant(this.ALL_BUSINESS_REF.name),
-    //       attributes: []
-    //     }])),
-    //     takeUntil(this.ngUnsubscribe)
-    //   );
+   
       return of([]);
   }
 }

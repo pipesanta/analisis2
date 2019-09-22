@@ -13,19 +13,49 @@ export class FuseNavigationModel implements FuseNavigationModelInterface {
                 "type": "group",
                 "icon": "location_searching",
                 "children": [
-                        {
-                                "id": "AUTHOR_COLLABORATIONS",
-                                "title": "Collaboration by Author",
-                                "translate": "NAV.REPORTS.AUTHOR_COLLABORATIONS",
-                                "type": "item",
-                                "url": "/author-collaborations",
-                                "icon": "rowing",
-                                "priority": 1000,
-                                "default": true
-                        }
+                    {
+                        "id": "AUTHOR_COLLABORATIONS",
+                        "title": "Collaboration by Author",
+                        "translate": "NAV.REPORTS.AUTHOR_COLLABORATIONS",
+                        "type": "item",
+                        "url": "/author-collaborations",
+                        "icon": "rowing",
+                        "priority": 1000,
+                        "default": true
+                    },
+                    {
+                        "id": "AUTHORS_CHARACTERISATION",
+                        "title": "authors characterisation",
+                        "translate": "NAV.REPORTS.AUTHORS_CHARACTERISATION",
+                        "type": "item",
+                        "url": "/authors-characterisation",
+                        "icon": "rowing",
+                        "priority": 1000,
+                        "default": true
+                    },
+                    {
+                        "id": "INSTITUTIONS_ACTIVITY_CHARACTERISATION",
+                        "title": "institutions-activity-characterisation",
+                        "translate": "NAV.REPORTS.INSTITUTIONS_ACTIVITY_CHARACTERISATION",
+                        "type": "item",
+                        "url": "/institutions-activity-characterisation",
+                        "icon": "rowing",
+                        "priority": 1000,
+                        "default": true
+                    },
+                    {
+                        "id": "JOURNALS_CHARACTERISATION",
+                        "title": "journals-characterisation",
+                        "translate": "NAV.REPORTS.JOURNALS_CHARACTERISATION",
+                        "type": "item",
+                        "url": "/journals-characterisation",
+                        "icon": "rowing",
+                        "priority": 1000,
+                        "default": true
+                    }
                 ],
                 "priority": 500
-        }
+            }
         ];
     }
 }
