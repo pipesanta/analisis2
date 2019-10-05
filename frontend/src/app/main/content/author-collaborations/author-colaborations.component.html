@@ -5,7 +5,7 @@
   <!-- / TOP BACKGROUND -->
 
   <!-- CENTER -->
-  <div class="center">
+  <div class="center" >
 
     <!-- HEADER -->
     <div class="header white-fg" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
@@ -43,23 +43,29 @@
     <!-- / HEADER -->
 
     <!-- CONTENT CARD [CODE HERE]  -->
-    <div class="content-card mat-white-bg">
-
-      <mat-chip-list aria-label="Fish selection">
-        <mat-chip *ngFor="let item of resultList">
-          {{ item.name }}
-        </mat-chip>
-        <!-- <mat-chip>Two fish</mat-chip>
-            <mat-chip color="primary" selected>Primary fish</mat-chip>
-            <mat-chip color="accent" selected>Accent fish</mat-chip> -->
-      </mat-chip-list>
+    <div class="content-card mat-white-bg" fusePerfectScrollbar >
 
 
 
-      <!-- <div *ngFor="let item of resultList">
-        <span>Nombre: {{ item.author }} </span>
-        <span>otra: {{ item.name }} ===> {{ item.cantidad}} </span>
-      </div> -->
+
+
+      <div *ngFor="let item of articleList" class="article-item">
+        <div class="info-tittle">Titulo: {{ item.name }}</div>
+        
+        <div class="info-autor">Autor principal: {{ item.mainAuthor.name + " " + item.mainAuthor.lastName  }} </div>
+        <div class="info">Campos de Estudio: {{ item.fields_of_study }} </div>
+        <h2>Colaboró con:</h2>
+        <div *ngFor="let colaborator of item.authorsColab">
+          <div>{{colaborator.name + " " + colaborator.lastName}}</div>
+        </div>
+
+
+        <!-- <div class="info">Campos de Estudio: {{}} </div> -->
+        <!-- <div class="info">Colaboró con: {{ item.fields_of_study }} </div> -->
+
+        <!-- <div>Autor principal: {{ item.mainAuthor.name }} </div> -->
+        
+      </div>
 
     </div>
     <!-- / CONTENT CARD -->

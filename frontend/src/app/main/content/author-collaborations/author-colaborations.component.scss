@@ -23,3 +23,30 @@
 .red-text {
     color: red;
 }
+
+
+.article-item{
+  // display: flex;
+  // flex-direction: column;
+
+  border: 1px solid;
+  border-radius: 15px;
+  margin: 4px;
+  padding: 10px;
+  background: rgb(236, 211, 186);
+  margin-bottom: 10px;
+}
+
+.info-tittle{
+  font-size: 20px;  
+
+}
+.info-autor{
+  font-size: 20px;  
+
+}
+.info{
+
+margin-top: 5px;
+
+}

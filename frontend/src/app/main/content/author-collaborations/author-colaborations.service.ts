@@ -13,13 +13,9 @@ export class AuthorColaborationsService {
     ) {}
 
   getArticlesByAuthor$(filterText: string){
-    return from(PART_O1)
-    .pipe(
-      // filter(article => (article.name.toUpperCase()).includes(filterText.toUpperCase()))
-      toArray()
-    );
+    
 
-    // return this.httpClient.get("localhost:getAuthorCol")
+    return this.httpClient.get("http://localhost:7070/alarm/getAlarms")
 
   }
 
