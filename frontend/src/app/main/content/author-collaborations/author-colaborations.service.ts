@@ -15,7 +15,7 @@ export class AuthorColaborationsService {
   getArticlesByAuthor$(filterText: string){
     
 
-    return this.httpClient.get("http://localhost:7070/alarm/getAlarms")
+    return this.httpClient.get("http://localhost:7172")
 
   }
 

@@ -38,16 +38,18 @@ export class AuthorColaborationsComponent implements OnInit, OnDestroy {
         mergeMap(filterText => this.authorCollaborationsService.getArticlesByAuthor$(filterText))
       )
       .subscribe((results : any[]) => {
+        console.log("##########################");
+        console.log(results);
 
-        this.articleList = results
-          .map(item => ({
-            name: item.title,
-            fields_of_study: item.fields_of_study.map(i => i.name).join(" "),
-            mainAuthor: { name: item.authors[0].first_name, lastName : item.authors[0].last_name },
-            authorsColab: item.authors.slice(1).map(i => ({ name: i.first_name, lastName: i.last_name }) )
-          }));
+        // this.articleList = results
+        //   .map(item => ({
+        //     name: item.title,
+        //     fields_of_study: item.fields_of_study.map(i => i.name).join(" "),
+        //     mainAuthor: { name: item.authors[0].first_name, lastName : item.authors[0].last_name },
+        //     authorsColab: item.authors.slice(1).map(i => ({ name: i.first_name, lastName: i.last_name }) )
+        //   }));
 
-          console.log(this.articleList);
+        //   console.log(this.articleList);
       }
 
 
