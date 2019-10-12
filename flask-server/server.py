@@ -24,16 +24,22 @@ class Multi(Resource):
     def get(self, num):
         return {'result': num*10}
 
-class consultaApi(Resource):
+class consultaInstitution(Resource):
     def get(self,nom):
         
        
-        autores=consulta.consultar(nombre=nom)
-        print(autores)        
-        return json.dumps(autores)
+        autores=consulta.institution_search(nom)
+        return (autores)
 
-api.add_resource(consultaApi, '/<string:nom>')
-
+class consultaInfo(Resource):
+    def get(self,nom):
+        
+       
+        autores=consulta.institution_info(nom)
+        return (autores)
+   
+api.add_resource(consultaInstitution, '/institution/<string:nom>')
+api.add_resource(consultaInfo, '/institution/information/<string:nom>')
 api.add_resource(HelloWorld, '/')
 api.add_resource(Multi, '/multi/<int:num>')
 

@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { filter, tap, mergeMap, debounceTime } from 'rxjs/operators';
 import { AuthorsCharacterisationService } from './authors-characterisation.service';
+import {Router} from '@angular/router';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -14,15 +15,25 @@ export class AuthorsCharacterisationComponent implements OnInit, OnDestroy {
 
   filterTextControl = new FormControl('');
   resultList = [];
+  institutionList = [];
 
   constructor(
-    private authorsCharacterisationService: AuthorsCharacterisationService
+    private authorsCharacterisationService: AuthorsCharacterisationService,
+    private router: Router
   ) {
 
   }
 
   ngOnInit() {
     this.listenSearchbar();
+
+    this.authorsCharacterisationService.searchInstitutions$()
+    .subscribe(
+      result => {
+        this.institutionList = result;
+      }
+    )
+
   }
 
 
@@ -55,6 +66,12 @@ export class AuthorsCharacterisationComponent implements OnInit, OnDestroy {
 
 
 
+
+  }
+
+  navigateToDetail(id: string){
+    console.log("se dio click en => ", id );
+    this.router.navigateByUrl('/authors-characterisation/detail');
 
   }
 }
