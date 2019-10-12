@@ -10,6 +10,9 @@ api = Api(app)
 import json
 import consulta
 
+# Author collaborations
+# import authorCollaboration
+
 
 
 class HelloWorld(Resource):
@@ -25,10 +28,8 @@ class Multi(Resource):
         return {'result': num*10}
 
 class consultaInstitution(Resource):
-    def get(self,nom):
-        
-       
-        autores=consulta.institution_search(nom)
+    def get(self, nom):
+        autores = consulta.institution_search(nom)
         return (autores)
 
 class consultaInfo(Resource):
@@ -37,12 +38,20 @@ class consultaInfo(Resource):
        
         autores=consulta.institution_info(nom)
         return (autores)
+
+class AuthorCollaborationsFindAuthor(Resource):
+    def get(self,nom):
+        autores=consulta.institution_info(nom)
+        return (autores)
+
+
    
 api.add_resource(consultaInstitution, '/institution/<string:nom>')
 api.add_resource(consultaInfo, '/institution/information/<string:nom>')
+# api.add_resource(consultaInfo, '/institution/information/<string:nom>')
 api.add_resource(HelloWorld, '/')
 api.add_resource(Multi, '/multi/<int:num>')
 
 
 if __name__=='__main__':
-    app.run(host='127.0.0.1',port=7172, debug=True)
+    app.run(host='0.0.0.0',port=7172, debug=True)
