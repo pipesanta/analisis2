@@ -1,7 +1,7 @@
 ////////// ANGULAR //////////
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { filter, tap, mergeMap, debounceTime } from 'rxjs/operators';
+import { filter, tap, mergeMap, debounceTime, map } from 'rxjs/operators';
 import { AuthorColaborationsService } from './author-colaborations.service';
 
 @Component({
@@ -49,6 +49,7 @@ export class AuthorColaborationsComponent implements OnInit, OnDestroy {
         console.log("##########################");
         console.log(results);
 
+        /*
         this.articleList = results
           .map(item => ({
             name: item.title,
@@ -56,6 +57,7 @@ export class AuthorColaborationsComponent implements OnInit, OnDestroy {
             mainAuthor: { name: item.authors[0].first_name, lastName : item.authors[0].last_name },
             authorsColab: item.authors.slice(1).map(i => ({ name: i.first_name, lastName: i.last_name }) )
           }));
+          */
 
         //   console.log(this.articleList);
       }

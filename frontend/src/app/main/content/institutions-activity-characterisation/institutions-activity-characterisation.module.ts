@@ -16,7 +16,7 @@ const routes: Routes = [
     component: InstitutionsActivityCharacterisationComponent,
   },  
   {
-    path: 'detail',
+    path: 'detail/:id',
     component: InstitutionDetailsComponent,
   }
 ];

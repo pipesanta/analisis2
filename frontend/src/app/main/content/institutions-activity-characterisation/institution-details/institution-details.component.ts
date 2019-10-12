@@ -1,9 +1,10 @@
 ////////// ANGULAR //////////
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { filter, tap, mergeMap, debounceTime } from 'rxjs/operators';
+import { filter, tap, mergeMap, debounceTime, merge, map } from 'rxjs/operators';
 import { InstitutionsIctivityCharacterisationService } from '../institutions-activity-characterisation.service';
 import {Router} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -17,17 +18,34 @@ export class InstitutionDetailsComponent implements OnInit, OnDestroy {
   resultList = [];
   institutionList = [];
 
+  institutioinInfo = null;
+
   constructor(
     private institutionsIctivityCharacterisationService: InstitutionsIctivityCharacterisationService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute 
   ) {
 
   }
 
   ngOnInit() {
 
+    this.loadInstitutionData();
+
+
   }
 
+  loadInstitutionData(){
+    this.route.params
+      .pipe(
+        map( params => params.id ),
+        mergeMap(id => this.institutionsIctivityCharacterisationService.getInstitutionInfo$(id) )
+      )
+    .subscribe((data: any) => {
+        data.name =  data.name || 'Sin nombre';
+        this.institutioinInfo = data;
+    });
+  }
 
   ngOnDestroy() {
 

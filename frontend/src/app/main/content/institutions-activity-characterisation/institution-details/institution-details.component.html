@@ -1,33 +1,34 @@
 <div id="spending_rules" class="page-layout carded fullwidth" fusePerfectScrollbar>
 
-  <!-- TOP BACKGROUND -->
-  <div class="top-bg mat-accent-bg"></div>
-  <!-- / TOP BACKGROUND -->
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg mat-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
 
-  <!-- CENTER -->
-  <div class="center">
+    <!-- CENTER -->
+    <div class="center">
 
-    <!-- HEADER -->
-    <div class="header white-fg" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
-      fxLayoutAlign.gt-xs="space-between center">
+        <!-- HEADER -->
+        <div class="header white-fg" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
 
-      <!-- APP TITLE -->
-      <div class="logo my-12 m-sm-0" fxLayout="row" fxLayoutAlign="start center">
-        <mat-icon class="logo-icon mr-16" *fuseIfOnDom>bookmark</mat-icon>
-        <span class="logo-text h1">Caracterización de autores</span>
-      </div>
-      <!-- / APP TITLE -->
+            <!-- APP TITLE -->
+            <div class="logo my-12 m-sm-0" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16" *fuseIfOnDom>bookmark</mat-icon>
+                <span class="logo-text h1">Caracterización de autores</span>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD [CODE HERE]  -->
+        <div class="content-card mat-white-bg" fusePerfectScrollbar>
+
+            <div *ngIf="institutioinInfo">
+                Nombre: {{ institutioinInfo.name }}
+            </div>
+
+
+        </div>
+        <!-- / CONTENT CARD -->
     </div>
-    <!-- / HEADER -->
-
-    <!-- CONTENT CARD [CODE HERE]  -->
-    <div class="content-card mat-white-bg" fusePerfectScrollbar>
-
-      el detalle de la institucion
-
-
-    </div>
-    <!-- / CONTENT CARD -->
-  </div>
-  <!-- / CENTER -->
+    <!-- / CENTER -->
 </div>

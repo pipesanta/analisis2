@@ -111,10 +111,10 @@ def institution_info(search):
     for institution in institutions:
         if institution.institution.lower() == (search.lower()):
             insti = institution
-            return({"Nombre: ": insti.institution,
-                "Autores: ": insti.author,
-                "Temas: ": insti.fields,
-                "Articulos: ": insti.articles})
+            return({"name": insti.institution,
+                "authors": insti.author,
+                "topics": insti.fields,
+                "articles": insti.articles})
     else:
         return{"Nombre": "No existe"}
 
