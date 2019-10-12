@@ -7,17 +7,12 @@ import { FuseWidgetModule } from '../../../core/components/widget/widget.module'
 import { ChartsModule } from 'ng2-charts';
 import { AuthorsCharacterisationComponent } from './authors-characterisation.component';
 import { AuthorsCharacterisationService } from './authors-characterisation.service';
-import { InstitutionDetailsComponent } from './institution-details/institution-details.component';
 
 const routes: Routes = [
   {
     path: '',
     component: AuthorsCharacterisationComponent,
   },
-  {
-    path: 'detail',
-    component: InstitutionDetailsComponent,
-  }
 ];
 
 @NgModule({
@@ -28,7 +23,7 @@ const routes: Routes = [
     ChartsModule
   ],
   declarations: [
-    AuthorsCharacterisationComponent, InstitutionDetailsComponent
+    AuthorsCharacterisationComponent
   ],
   providers: [ AuthorsCharacterisationService, DatePipe]
 })

@@ -1,48 +1,54 @@
 <div id="spending_rules" class="page-layout carded fullwidth" fusePerfectScrollbar>
 
-  <!-- TOP BACKGROUND -->
-  <div class="top-bg mat-accent-bg"></div>
-  <!-- / TOP BACKGROUND -->
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg mat-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
 
-  <!-- CENTER -->
-  <div class="center">
 
-    <!-- HEADER -->
-    <div class="header white-fg" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
-      fxLayoutAlign.gt-xs="space-between center">
 
-      <!-- APP TITLE -->
-      <div class="logo my-12 m-sm-0" fxLayout="row" fxLayoutAlign="start center">
-        <mat-icon class="logo-icon mr-16" *fuseIfOnDom>bookmark</mat-icon>
-        <span class="logo-text h1">Caracterización de  instituciones</span>
-      </div>
-      <!-- / APP TITLE -->
+    <!-- CENTER -->
+    <div class="center">
 
-      <!-- SEARCH -->
-      <!-- <div class="search-input-wrapper mx-12 m-md-0" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
-        <label for="search" class="mr-8">
-          <mat-icon class="secondary-text">search</mat-icon>
-        </label>
-        <mat-form-field floatPlaceholder="never" fxFlex="1 0 auto">
-          <input id="search" [formControl]="filterTextControl" matInput placeholder="Autor a consultar">
-        </mat-form-field>
-      </div> -->
-      <!-- / SEARCH -->
+        <!-- HEADER -->
+        <div class="header white-fg" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+
+            <!-- APP TITLE -->
+            <div class="logo my-12 m-sm-0" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16" *fuseIfOnDom>bookmark</mat-icon>
+                <span class="logo-text h1">Caracterización de insstituciones</span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <div class="search-input-wrapper mx-12 m-md-0" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+                <label for="search" class="mr-8">
+              <mat-icon class="secondary-text">search</mat-icon>
+            </label>
+                <mat-form-field floatPlaceholder="never" fxFlex="1 0 auto">
+                    <input id="search" [formControl]="filterTextControl" matInput placeholder="Búsqueda">
+                </mat-form-field>
+
+                <mat-radio-group aria-label="Select an option">
+                    <mat-radio-button value="1" color="warm">Autor</mat-radio-button>
+                    <mat-radio-button value="2">Institución</mat-radio-button>
+                </mat-radio-group>
+
+
+            </div>
+            <!-- / SEARCH -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD [CODE HERE]  -->
+        <div class="content-card mat-white-bg" fusePerfectScrollbar>
+
+            <span class="font-size-32">AUTHORS CHARACTERISATION IMPLEMENTATION</span>
+
+            <div *ngFor="let item of institutionList" class="institutionItem" (click)="navigateToDetail(item)">
+
+            </div>
+        </div>
+        <!-- / CONTENT CARD -->
     </div>
-    <!-- / HEADER -->
-
-    <!-- CONTENT CARD [CODE HERE]  -->
-    <div class="content-card mat-white-bg">
-
-      <span class="font-size-32">institutions-activity-characterisation</span>
-
-      <mat-chip-list aria-label="Fish selection">
-        <mat-chip *ngFor="let item of resultList">
-          {{ item.name }}
-        </mat-chip>
-      </mat-chip-list>
-    </div>
-    <!-- / CONTENT CARD -->
-  </div>
-  <!-- / CENTER -->
+    <!-- / CENTER -->
 </div>

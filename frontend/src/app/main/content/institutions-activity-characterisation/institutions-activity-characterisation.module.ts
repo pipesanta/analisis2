@@ -8,10 +8,16 @@ import { ChartsModule } from 'ng2-charts';
 import { InstitutionsActivityCharacterisationComponent } from './institutions-activity-characterisation.component';
 import { InstitutionsIctivityCharacterisationService } from './institutions-activity-characterisation.service';
 
+import { InstitutionDetailsComponent } from './institution-details/institution-details.component';
+
 const routes: Routes = [
   {
     path: '',
     component: InstitutionsActivityCharacterisationComponent,
+  },  
+  {
+    path: 'detail',
+    component: InstitutionDetailsComponent,
   }
 ];
 
@@ -23,7 +29,7 @@ const routes: Routes = [
     ChartsModule
   ],
   declarations: [
-    InstitutionsActivityCharacterisationComponent    
+    InstitutionsActivityCharacterisationComponent, InstitutionDetailsComponent
   ],
   providers: [ InstitutionsIctivityCharacterisationService, DatePipe]
 })

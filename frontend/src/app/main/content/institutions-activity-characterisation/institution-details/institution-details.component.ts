@@ -2,7 +2,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { filter, tap, mergeMap, debounceTime } from 'rxjs/operators';
-import { AuthorsCharacterisationService } from '../authors-characterisation.service';
+import { InstitutionsIctivityCharacterisationService } from '../institutions-activity-characterisation.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -18,7 +18,7 @@ export class InstitutionDetailsComponent implements OnInit, OnDestroy {
   institutionList = [];
 
   constructor(
-    private authorsCharacterisationService: AuthorsCharacterisationService,
+    private institutionsIctivityCharacterisationService: InstitutionsIctivityCharacterisationService,
     private router: Router
   ) {
 
