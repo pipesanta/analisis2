@@ -119,55 +119,32 @@ def institution_info(search):
         return{"Nombre": "No existe"}
 
 
-"""def field_search():
-    search = ""
+def fields_search(search):
     found_fields = []
-    while search == "":
-        search = input('Introduzca Tema a buscar: ')
+    if search == "":
+        return({"field" : 'Vacio '})
     search = search.lower()
+
     for field in fields_of_study:
         if field.lower().__contains__(search):
             found_fields += [field]
 
-    while not found_fields:
-        search = input('No se ha encontrado ningún tema \n \
-         si desea salir ingrese 0 \n \
-         Introduzca tema a Buscar: ')
-        if search == "0":
-            sys.exit()
-        for field in fields_of_study:
-            if field.lower().__contains__(search):
-                found_fields += [field]
+    return {"field" : found_fields}
 
-    for pos in range(len(found_fields)):
-        print(pos, "- ", found_fields[pos])
 
-    option = ""
-    while option == "":
+def fields_info(option):
+    if option == "":
         print()
-        option = input("Ingrese el número de un Tema para buscar Instituciones relevantes: ")
-        try:
-            option = int(option)
-            if int(option) < 0 or int(option) >= len(found_fields):
-                option = ""
-                print("Opción Invalida")
-        except:
-            print("Opción Invalida")
-            option = ""
+        return({"institutions": ""})
 
-    option = found_fields[option]
     found_institutions = []
     for institution in institutions:
         if option in institution.fields:
-            found_institutions += [institution]
-
-    print()
-    print("Instituciones con relación al Tema: ")
-    for institution in found_institutions:
-        print(institution.institution)
-    if len(found_institutions) == 0:
-        print("No hay instituciones relacionadas con el tema ")"""
+            print("Match")
+            found_institutions += [institution.institution]
+    return {"institution" : found_institutions}
 
 
+#print(fields_info(input("Ingrese el tema ")))
 
 
