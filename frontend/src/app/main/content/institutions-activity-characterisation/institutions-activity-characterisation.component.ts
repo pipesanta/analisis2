@@ -37,7 +37,7 @@ export class InstitutionsActivityCharacterisationComponent implements OnInit, On
           return filterText != null && filterText !== '';
         }),
         debounceTime(500),
-        tap(filterText => console.log('Buscar por el author que conicida con  ==> ', filterText)),
+        tap(filterText => console.log('Buscar por el author que coincida con  ==> ', filterText)),
         mergeMap(filterText => this.institutionsIctivityCharacterisationService.searchInstitutions$(filterText)),
 
       )

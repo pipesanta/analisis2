@@ -43,6 +43,9 @@ export class InstitutionDetailsComponent implements OnInit, OnDestroy {
       )
     .subscribe((data: any) => {
         data.name =  data.name || 'Sin nombre';
+        data.authors = data.authors || 'No hay autores correspondientes';
+        data.topics = data.topics || 'No hay campos de estudio';
+        data.articles = data.articles || 'No hay artículos';
         this.institutioinInfo = data;
     });
   }

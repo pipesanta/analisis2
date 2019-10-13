@@ -20,15 +20,57 @@
         <!-- / HEADER -->
 
         <!-- CONTENT CARD [CODE HERE]  -->
+
+
+
         <div class="content-card mat-white-bg" fusePerfectScrollbar>
 
-            <div *ngIf="institutioinInfo">
-                Nombre: {{ institutioinInfo.name }}
+            <div class="container">
+                <div class="divTitle">
+                    <h1 class="mainTitle">{{ institutioinInfo.name }}</h1>
+                </div>
+                <section class="main row">
+                    <article class="col-xs-12 col-sm-7 col-md-8 col-lg-8">
+
+                        <div class="contenedorTitulos">
+
+                            <h2>Artículos</h2>
+                        </div>
+
+                        <ul class="list-group list-group-flush">
+                            <div *ngFor="let item of institutioinInfo.articles">
+                                <li class="list-group-item">{{ item }}</li>
+                            </div>
+                        </ul>
+                        <br/>
+                        <div class="contenedorTitulos">
+
+                            <h2>Campos de estudio:</h2>
+                        </div>
+
+
+                        <ul class="list-group list-group-flush">
+                            <div *ngFor="let item of institutioinInfo.topics">
+                                <li class="list-group-item">{{ item }}</li>
+                            </div>
+                        </ul>
+                    </article>
+                    <aside class="col-xs-12 col-sm-5 col-md-4 col-lg-4">
+
+                        <ul class="list-group">
+                            <div class="contenedorTitulos">
+                                <h2>Autores</h2>
+                            </div>
+
+                            <div *ngFor="let item of institutioinInfo.authors">
+                                <li class="list-group-item">{{ item }}</li>
+                            </div>
+                        </ul>
+                    </aside>
+                </section>
+
             </div>
-
-
+            <!-- / CONTENT CARD -->
         </div>
-        <!-- / CONTENT CARD -->
+        <!-- / CENTER -->
     </div>
-    <!-- / CENTER -->
-</div>

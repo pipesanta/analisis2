@@ -57,7 +57,7 @@ const appRoutes: Routes = [
     TranslateModule.forRoot(),
     FuseMainModule,
     ServiceWorkerModule.register('/emi/ngsw-worker.js', { enabled: environment.production }),
-    ChartModule
+    ChartModule, 
   ],
   providers: [
     {

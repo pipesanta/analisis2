@@ -15,7 +15,7 @@
             <!-- APP TITLE -->
             <div class="logo my-12 m-sm-0" fxLayout="row" fxLayoutAlign="start center">
                 <mat-icon class="logo-icon mr-16" *fuseIfOnDom>bookmark</mat-icon>
-                <span class="logo-text h1">Caracterización de insstituciones</span>
+                <span class="logo-text h1">Caracterización de instituciones</span>
             </div>
             <!-- / APP TITLE -->
 
@@ -29,8 +29,8 @@
                 </mat-form-field>
 
                 <mat-radio-group aria-label="Select an option">
-                    <mat-radio-button value="1" color="warm">Autor</mat-radio-button>
-                    <mat-radio-button value="2">Institución</mat-radio-button>
+                    <mat-radio-button value="1" color="warm">Institución</mat-radio-button>
+                    <mat-radio-button value="2">Campo de estudio</mat-radio-button>
                 </mat-radio-group>
 
 
@@ -41,11 +41,10 @@
 
         <!-- CONTENT CARD [CODE HERE]  -->
         <div class="content-card mat-white-bg" fusePerfectScrollbar>
-
-            <span class="font-size-32">AUTHORS CHARACTERISATION IMPLEMENTATION</span>
-
-            <div *ngFor="let item of institutionList" class="institutionItem" (click)="navigateToDetail(item)">
-                {{ item }}
+            <div class="list-group">
+                <div *ngFor="let item of institutionList" (click)="navigateToDetail(item)" class="bordecito">
+                    <a style="text-decoration:none " class="list-group-item list-group-item-action"><span class="institution">{{ item }}</span></a>
+                </div>
             </div>
         </div>
         <!-- / CONTENT CARD -->
