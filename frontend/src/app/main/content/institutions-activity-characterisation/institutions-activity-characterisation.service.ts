@@ -25,5 +25,14 @@ export class InstitutionsIctivityCharacterisationService {
     return this.httpClient.get(`${SERVER_POST}institution/information/${id}`);
   }
 
+  searchFields$(textFilter: string) {
+    return this.httpClient.get(`${SERVER_POST}fields/${textFilter}`);
+  }
+
+  getFieldsInfo$(id) {
+    return this.httpClient.get(`${SERVER_POST}fields/information/${id}`);
+  }
+
+
 
 }
