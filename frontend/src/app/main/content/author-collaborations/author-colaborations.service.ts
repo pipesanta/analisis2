@@ -12,10 +12,9 @@ export class AuthorColaborationsService {
     private httpClient: HttpClient
     ) {}
 
-  getArticlesByAuthor$(filterText: string){
-    
+  getArticlesByAuthor$(filterText: string){    
 
-    return this.httpClient.get("http://localhost:7172")
+    return this.httpClient.get("http://localhost:7172/author-collaboration/" + filterText )
 
   }
 
