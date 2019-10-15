@@ -19,7 +19,7 @@ export class PageNoFoundComponent implements OnInit, OnDestroy {
 
 
 
-  type = 'pie';
+  type = 'line';
   data = {
     datasets: [
       {
@@ -59,7 +59,7 @@ export class PageNoFoundComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    
+
     const fielsOfStudy = [ 'medicina', 'medicina', 'medicina','medicina', "biologia", "biologia","biologia","biologia","biologia","biologia",  ]
     fielsOfStudy.forEach(field => {
       console.log("ITEM ==> ", field);

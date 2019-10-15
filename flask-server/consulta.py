@@ -124,7 +124,7 @@ def fields_search(search):
 
 def fields_info(option):
     if option == "":
-        return({"institutions": ""})
+        return({"institutions": ""})    
 
     found_institutions = []
     for institution in institutions:
