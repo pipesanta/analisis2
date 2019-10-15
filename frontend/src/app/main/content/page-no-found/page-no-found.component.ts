@@ -60,7 +60,7 @@ export class PageNoFoundComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    const fielsOfStudy = [ 'medicina', 'medicina', 'medicina','medicina', "biologia", "biologia","biologia","biologia","biologia","biologia",  ]
+    const fielsOfStudy = [ '1998', '1998', '2000','2000', "2001", "2009","2010","2011","2010","2019",  ]
     fielsOfStudy.forEach(field => {
       console.log("ITEM ==> ", field);
       const filedIndex = this.data.labels.findIndex(label => label === field );

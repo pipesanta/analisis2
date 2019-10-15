@@ -39,11 +39,12 @@ for i in range(0, size):
     for insti in _institutions:
         if insti not in institutions_existence:
             institutions_existence += [insti]
-            institutions += [institutionInstitution.Institution(insti, _authors, _fields_of_study, [_article], year)]
+            institutions += [institutionInstitution.Institution(insti, _authors, _fields_of_study, [_article], year, [year])]
         else:
             pos = institutions_existence.index(insti)
             for f in institutions:
               if f.institution == insti:
+                f.alternative_trayectory += [year]
                 f.update_trayectory(year)
 
             for author in _authors:
@@ -136,11 +137,15 @@ def trayectory(insti):
     import operator
     for institution in institutions:
         if institution.institution.lower() == (insti.lower()):
-            insti = institution
-            resultado = sorted(insti.trayectory.items(), key=operator.itemgetter(0))
+            resultado = sorted(institution.trayectory.items(), key=operator.itemgetter(0))
             resultado = {i[0] : i[1] for i in resultado}
             return({"Trayectory": resultado})
     else:
         return{"Nombre": "No existe"}
+
+def alternative_trayectory(insti):
+    for institution in institutions:
+        if institution.institution.lower() == (insti.lower()):
+            return institution.alternative_trayectory
 
 
