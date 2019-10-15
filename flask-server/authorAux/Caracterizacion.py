@@ -24,70 +24,6 @@ paises = pd.read_csv(URL)
 paises = paises.set_index('Code').T.to_dict('list')
 paises['XXX'] = 'No_Disponible'
 
-
-def consultar(nombre):
-    coincidencias = []
-    for index, value in zip(data.index, data['authors']):
-
-        for autor in value:
-            aux = str(autor['first_name'])+" "+str(autor['last_name'])
-            pais = 'XXX'
-
-            if (nombre.lower() in aux.lower()):
-                for uni in autor['affiliations']:
-                    universidad = uni['name']
-                    try:
-                        grid = uni['grid']
-                        for a in grid['addresses']:
-                            pais = a['country_code']
-                            break
-                        break
-                    except:
-                        continue
-                    break
-                retorno = [int(index), aux, universidad,
-                           paises[pais][0], data.loc[int(index), 'title'],
-                           data.loc[int(index), 'year_published'], data.loc[int(
-                               index), 'referenced_by_count'],
-                           data.loc[int(index), 'record_lens_id']]
-                coincidencias.append(retorno)
-                break
-    return coincidencias
-
-
-def listar(autor):
-
-    resultado = consultar(nombre=autor)
-    megaArregloAutores = []
-    if (len(resultado) == 0):
-        print("Autor no encontrado")
-    else:
-        print("Coincidencias halladas:")
-        nombres = []
-        for campo in resultado:
-            if(campo[1] not in nombres):
-                nombres.append(campo[1])
-                listaArticulos = listarArticulos(resultado, campo[1])
-                autor = Autor(nombre=campo[1], articulos=listaArticulos,
-                              area="No disponible", institucion=campo[2])
-                diccionario = autor.autorToDiccionario()
-                megaArregloAutores.append(diccionario)
-
-        return megaArregloAutores
-
-
-def listarArticulos(arreglo, nombre):
-    articulosDiccionarios = []
-
-    for art in arreglo:
-        if (art[1] == nombre):
-            articulo = Articulo(art[4], art[5], art[6], art[7])
-
-
-            diccionario = articulo.articuloToDiccionario()
-            articulosDiccionarios.append(diccionario)
-    return articulosDiccionarios
-
 class Articulo():
 
     def __init__(self, nombre, añoPublicacion, numeroCitas, id):
@@ -161,3 +97,67 @@ class Autor():
     def autorToDiccionario(self):
         autorDiccionario = {'Nombre': str(self.__nombre), 'Articulos': self.__articulos, 'Area': str(self.__area), 'Institucion': str(self.__institucion)}
         return autorDiccionario
+
+def consultar(nombre):
+    coincidencias = []
+    for index, value in zip(data.index, data['authors']):
+
+        for autor in value:
+            aux = str(autor['first_name'])+" "+str(autor['last_name'])
+            pais = 'XXX'
+            universidad=""
+            if (nombre.lower() in aux.lower()):
+                for uni in autor['affiliations']:
+                    universidad = uni['name']
+                    try:
+                        grid = uni['grid']
+                        for a in grid['addresses']:
+                            pais = a['country_code']
+                            break
+                        break
+                    except:
+                        continue
+                    break
+                retorno = [int(index), aux, universidad,
+                           paises[pais][0], data.loc[int(index), 'title'],
+                           data.loc[int(index), 'year_published'], data.loc[int(
+                               index), 'referenced_by_count'],
+                           data.loc[int(index), 'record_lens_id']]
+                coincidencias.append(retorno)
+                break
+    return coincidencias
+
+
+def listar(autor):
+
+    resultado = consultar(nombre=autor)
+    megaArregloAutores = []
+    if (len(resultado) == 0):
+        print("Autor no encontrado")
+    else:
+        print("Coincidencias halladas:")
+        nombres = []
+        for campo in resultado:
+            if(campo[1] not in nombres):
+                nombres.append(campo[1])
+                listaArticulos = listarArticulos(resultado, campo[1])
+                autor = Autor(nombre=campo[1], articulos=listaArticulos,
+                              area="No disponible", institucion=campo[2])
+                diccionario = autor.autorToDiccionario()
+                megaArregloAutores.append(diccionario)
+
+        return megaArregloAutores
+
+
+def listarArticulos(arreglo, nombre):
+    articulosDiccionarios = []
+
+    for art in arreglo:
+        if (art[1] == nombre):
+            articulo = Articulo(art[4], art[5], art[6], art[7])
+
+
+            diccionario = articulo.articuloToDiccionario()
+            articulosDiccionarios.append(diccionario)
+    return articulosDiccionarios
+

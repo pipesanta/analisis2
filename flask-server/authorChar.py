@@ -12,7 +12,7 @@ from urllib.parse import unquote
 from authorAux import Caracterizacion
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 api = Api(app)

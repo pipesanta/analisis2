@@ -39,7 +39,16 @@ export class AuthorsCharacterisationComponent implements OnInit, OnDestroy {
         mergeMap(filterText => this.authorsCharacterisationService.searchAuthors$(filterText))
       )
       .subscribe((results: any) => {
-        this.resultList = results;
+        var data= new Array();
+        //this.resultList = results;
+        var resultados = JSON.parse(results)
+        for(var i = 0; i < resultados.length; i++) {
+          var obj = resultados[i].Nombre;
+      
+          //console.log(obj);
+          data.push(obj);
+        }
+        this.resultList=data;
       }
       
       
