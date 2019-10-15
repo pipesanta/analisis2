@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from flask import Flask, request
 from flask_restful import Resource, Api
 from flask_cors import CORS

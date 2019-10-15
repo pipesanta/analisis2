@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import dataReference
 
 data =  dataReference.getDataRef()
