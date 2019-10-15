@@ -35,20 +35,17 @@ class Article:
     for author in self.colaborators:
       collaboratorAsJson.append(author.parseToJson())
     return {
-      "isnns": self.isnns,
-      "title": self.title,
-      "year": self.year,
-      "publicationType": self.publicationType,
-      "language": self.language,
+      "isnns": self.isnns or "",
+      "title": self.title or "",
+      "year": str(self.year or 0),
+      "publicationType": self.publicationType or "",
+      "language": self.language or "",
       "author": self.author.parseToJson(),
-      "colaborators": collaboratorAsJson
+      "collaborators": collaboratorAsJson,
+      "fieldsOfStudy": []
     }
 
-    
-    
-    
-    
-      
+
 class Author:
   def __init__(self, name, surname, country):
     
@@ -65,23 +62,23 @@ class Author:
   
   def parseToJson(self):
     return {
-      "name": self.name,
-      "surname": self.surname,
-      "country": self.country
+      "name": self.name or "",
+      "surname": self.surname or "",
+      "country": self.country or ""
     }
     
 def buildArticle(index):  
-  isnns = data["record_lens_id"][index] or ''
-  publicationType = data["publication_type"][index] or ''
-  title = data["title"][index] or ''
+  isnns = data["record_lens_id"][index] or ""
+  publicationType = data["publication_type"][index] or ""
+  title = data["title"][index] or ""
   year = data["year_published"][index] or 0
   language = data["languages"][index] or []
   
   mainAuthorRef = data["authors"][index][0]
   colaboratorsRef = data["authors"][index][1:]
   
-  mainAuthorName = mainAuthorRef["first_name"] or ''
-  mainAuthorSurname = mainAuthorRef["last_name"] or ''
+  mainAuthorName = mainAuthorRef["first_name"] or ""
+  mainAuthorSurname = mainAuthorRef["last_name"] or ""
   try:
     mainAuthorCountry = mainAuthorRef["affiliations"][0]["grid"]["addresses"][0]["country_code"]
   except:
@@ -90,8 +87,8 @@ def buildArticle(index):
   mainAuthor = Author( mainAuthorName, mainAuthorSurname, mainAuthorCountry)
   colaborators = []
   for colaborator in colaboratorsRef:
-    colaboratorName= colaborator["first_name"] or ''
-    colaboratorSurname= colaborator["last_name"] or ''
+    colaboratorName= colaborator["first_name"] or ""
+    colaboratorSurname= colaborator["last_name"] or ""
     authorColaborator=Author(colaboratorName, colaboratorSurname, None)
     colaborators.append(authorColaborator)
   
@@ -103,6 +100,7 @@ def buildArticle(index):
   
 def findAuthorsByName(text):
   results = []
+  jsonResult = []
   for index in range(0, articlesLength):
     authorsArray = data["authors"][index]
     
@@ -130,13 +128,17 @@ def findAuthorsByName(text):
     results.append(article)
     
   for result in results:
-    result.printInfo()
+    # result.printInfo()
+    jsonResult.append(result.parseToJson())
+
+  # print(jsonResult)
+  return jsonResult
 
     
-  print("El autor: " + text + " se encuentra en " + str(len(results)) +" resultados" )
+  # print("El autor: " + text + " se encuentra en " + str(len(results)) +" resultados" )
     
 
 
-authorName = input("¿Qué autor deseas buscar? \n")
-findAuthorsByName(authorName)
+# authorName = input("¿Qué autor deseas buscar? \n")
+# findAuthorsByName(authorName)
   

@@ -11,7 +11,7 @@ import json
 import consulta
 
 # Author collaborations
-# import authorCollaboration
+import authorCollaboration
 
 
 
@@ -40,17 +40,23 @@ class consultaInfo(Resource):
         return (autores)
 
 class AuthorCollaborationsFindAuthor(Resource):
-    def get(self,nom):
-        autores=consulta.institution_info(nom)
+    def get(self, nom):
+        autores=authorCollaboration.findAuthorsByName(nom)
         return (autores)
 
 
-   
-api.add_resource(consultaInstitution, '/institution/<string:nom>')
-api.add_resource(consultaInfo, '/institution/information/<string:nom>')
-# api.add_resource(consultaInfo, '/institution/information/<string:nom>')
+# samples
 api.add_resource(HelloWorld, '/')
 api.add_resource(Multi, '/multi/<int:num>')
+
+# Daniela - Guti
+api.add_resource(consultaInstitution, '/institution/<string:nom>')
+api.add_resource(consultaInfo, '/institution/information/<string:nom>')
+
+# Authors Collaborations
+
+api.add_resource(AuthorCollaborationsFindAuthor, '/author-collaboration/<string:nom>')
+
 
 
 if __name__=='__main__':
