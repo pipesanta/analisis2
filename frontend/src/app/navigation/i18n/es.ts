@@ -7,7 +7,8 @@ export const locale = {
                 AUTHOR_COLLABORATIONS: 'Colaboración de autores',
                 AUTHORS_CHARACTERISATION: 'Caracterización de Autores',
                 INSTITUTIONS_ACTIVITY_CHARACTERISATION: 'Caracterización de instituciones',
-                JOURNALS_CHARACTERISATION: 'Caracterización de revistas'
+                JOURNALS_CHARACTERISATION: 'Caracterización de revistas',
+                JOURNALS_COLLABORATION: 'Colaboración de revistas'
             }
         }
     }

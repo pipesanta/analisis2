@@ -41,6 +41,10 @@ const appRoutes: Routes = [
     loadChildren: './main/content/journals-characterisation/journals-characterisation.module#JournalsCharacterisationModule'
   },
   {
+    path: 'journals-collaboration',
+    loadChildren: './main/content/journals-collaboration/journals-collaboration.module#JournalsCollaborationModule'
+  },
+  {
     path: '**',
     redirectTo: 'page-no-found'
   }
@@ -57,7 +61,7 @@ const appRoutes: Routes = [
     TranslateModule.forRoot(),
     FuseMainModule,
     ServiceWorkerModule.register('/emi/ngsw-worker.js', { enabled: environment.production }),
-    ChartModule, 
+    ChartModule,
   ],
   providers: [
     {
