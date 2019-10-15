@@ -34,12 +34,21 @@ export class AuthorsCharacterisationComponent implements OnInit, OnDestroy {
         filter((filterText: any) => {
           return filterText != null && filterText !== '';
         }),
-        debounceTime(500),
+        debounceTime(50),
         tap(filterText => console.log('Buscar por el author que conicida con  ==> ', filterText)),
-        mergeMap(filterText => this.authorsCharacterisationService.getAnyInfoToTest$(filterText))
+        mergeMap(filterText => this.authorsCharacterisationService.searchAuthors$(filterText))
       )
       .subscribe((results: any) => {
-        this.resultList = results;
+        var data= new Array();
+        //this.resultList = results;
+        var resultados = JSON.parse(results)
+        for(var i = 0; i < resultados.length; i++) {
+          var obj = resultados[i].Nombre;
+      
+          //console.log(obj);
+          data.push(obj);
+        }
+        this.resultList=data;
       }
       
       
