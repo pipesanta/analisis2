@@ -1,2 +1,4 @@
 data/*
 *.pyc
+flask-server/authorAux/*.json
+flask-server/authorAux/*.csv

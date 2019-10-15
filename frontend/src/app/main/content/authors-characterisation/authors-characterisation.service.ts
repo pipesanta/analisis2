@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { GUTI_01, GUTI_02 } from '../../fake-db/part01';
 
 
+const SERVER_POST = 'http://localhost:5000/';
+
 @Injectable()
 export class AuthorsCharacterisationService {
   constructor(
@@ -17,6 +19,9 @@ export class AuthorsCharacterisationService {
       return of(PART_O1);
       // return this.httpClient.get(`${ip}institution/${filterText}`);
 
+  }
+  searchAuthors$(textFilter: string) {
+    return this.httpClient.get(`${SERVER_POST}authorsCharacterisation/${textFilter}`);
   }
 
 }
