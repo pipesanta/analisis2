@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { filter, tap, mergeMap, debounceTime } from 'rxjs/operators';
 import { AuthorsCharacterisationService } from './authors-characterisation.service';
 
+
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'authors-characterisation',
@@ -43,7 +44,7 @@ export class AuthorsCharacterisationComponent implements OnInit, OnDestroy {
         //this.resultList = results;
         var resultados = JSON.parse(results)
         for(var i = 0; i < resultados.length; i++) {
-          var obj = resultados[i].Nombre;
+          var obj = resultados[i];
       
           //console.log(obj);
           data.push(obj);
@@ -66,4 +67,30 @@ export class AuthorsCharacterisationComponent implements OnInit, OnDestroy {
   }
 
  
+}
+
+
+
+/**
+ * @title Expansion panel as accordion
+ */
+@Component({
+  selector: 'authors-characterisation',
+  templateUrl: './authors-characterisation.component.html',
+  styleUrls: ['./authors-characterisation.component.scss']
+})
+export class ExpansionStepsExample {
+  step = 0;
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
 }

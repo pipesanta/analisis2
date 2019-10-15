@@ -26,9 +26,9 @@
                   <input id="search" [formControl]="filterTextControl" matInput placeholder="Autor a consultar">
                 </mat-form-field>
         
-                <mat-radio-group aria-label="Select an option">
-                  <mat-radio-button value="1" >Autor</mat-radio-button>
-                </mat-radio-group>
+                <mat-chip-list aria-label="Fish selection">
+                  <mat-chip color="primary" selected>Buscar</mat-chip>
+                </mat-chip-list>
         
         
             </div>
@@ -41,12 +41,52 @@
 
             <span class="font-size-32">AUTHORS CHARACTERISATION IMPLEMENTATION</span>
             
-            <mat-chip-list aria-label="Fish selection">
+            <!--<mat-chip-list aria-label="Fish selection">
               <mat-chip *ngFor="let item of resultList">
                 {{ item }}
               </mat-chip> 
-            </mat-chip-list> 
+            </mat-chip-list> -->
+            <mat-accordion class="example-headers-align"  *ngFor="let item of resultList">
+              <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title >
+                    {{item.Nombre}}
+                  </mat-panel-title>
+                  
+                </mat-expansion-panel-header>
+            
+                  Area: {{item.Area}}
+                  <br/>
+                  Institución: {{item.Institucion}}
+
+                  <br/>
+                  <br/>
+                  <h3> Articulos</h3>
+                  <hr/>
+                  <p *ngFor="let art of item.Articulos">
+
+                    ------------------------------------------------------------------------------<br/>
+                    Titulo: {{art.Nombre}} <br />
+                    <br />
+                    Citas: {{art.NumeroCitas}} <br />
+                    <br />
+                    ID: {{art.ID}}
+                    <br/>
+                    <br/>
+                  </p>
+                  <hr/>
+
+            
+                <mat-action-row>
+                  <button mat-button color="primary" (click)="nextStep()">Next</button>
+                </mat-action-row>
+              </mat-expansion-panel>
+            
+              
+            
+            </mat-accordion>
         </div>
+        
         <!-- / CONTENT CARD -->
     </div>
     <!-- / CENTER -->
