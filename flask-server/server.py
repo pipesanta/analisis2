@@ -106,6 +106,7 @@ api.add_resource(consultaAlternativeTrayectory , '/institution/alternativetrayec
 # Authors Collaborations
 
 api.add_resource(AuthorCollaborationsFindAuthor, '/author-collaboration/<string:nom>')
+# api.add_resource(AuthorCollaborationsFindAuthor, '/author-collaboration/fields/<string:nom>')
 
 # Journals Characterization
 
