@@ -25,8 +25,8 @@ export class AuthorColaborationsComponent implements OnInit, OnDestroy {
   // chart 01
 
 
-  doughnutChartLabels = ["felipe", "samuel"];
-  doughnutChartData =  [ [ 350, 120 ] ];
+  doughnutChartLabels = [];
+  doughnutChartData =  [ [ ] ];
   doughnutChartType = 'doughnut';
 
   // chart 01
