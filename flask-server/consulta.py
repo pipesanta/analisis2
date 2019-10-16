@@ -140,7 +140,7 @@ def trayectory(insti):
         if institution.institution.lower() == (insti.lower()):
             resultado = sorted(institution.trayectory.items(), key=operator.itemgetter(0))
             resultado = {i[0] : i[1] for i in resultado}
-            return({"Trayectory": resultado})
+            return(resultado)
     else:
         return{"Nombre": "No existe"}
 
@@ -153,6 +153,6 @@ def author_field_search(author):
     author = author.lower()
     for aut in authors:
         if aut.author.lower().__contains__(author):
-            return {"fields" : aut.alternative_fields}
+            return aut.alternative_fields
 
 
