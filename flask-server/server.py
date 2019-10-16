@@ -45,8 +45,36 @@ class AuthorCollaborationsFindAuthor(Resource):
         autores=authorCollaboration.findAuthorsByName(nom)
         return (autores)
 
+class consultaFields(Resource):
+    def get(self, nom):
+        fields = consulta.fields_search(nom)
+        return (fields)
 
-# samples
+class consultaInfoFields(Resource):
+    def get(self,nom):
+       
+        info = consulta.fields_info(nom)
+        return (info)
+
+# Daniela
+class consultaTrayectory(Resource):
+    def get(self,nom):
+       
+        info = consulta.trayectory(nom)
+        return (info)
+
+class consultaAlternativeTrayectory(Resource):
+    def get(self,nom):
+       
+        info = consulta.alternative_trayectory(nom)
+        return (info)
+   
+api.add_resource(consultaInstitution, '/institution/<string:nom>')
+api.add_resource(consultaInfo, '/institution/information/<string:nom>')
+api.add_resource(consultaFields, '/fields/<string:nom>')
+api.add_resource(consultaInfoFields, '/fields/information/<string:nom>')
+api.add_resource(consultaTrayectory , '/institution/trayectory/<string:nom>')
+api.add_resource(consultaAlternativeTrayectory , '/institution/alternativetrayectory/<string:nom>')
 api.add_resource(HelloWorld, '/')
 api.add_resource(Multi, '/multi/<int:num>')
 

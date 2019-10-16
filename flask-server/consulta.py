@@ -1,33 +1,18 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 import dataReference
+import authorInstitution
+import institutionInstitution
 
 data = dataReference.getDataRef() #pd.read_json(path) #Mapeo en un objeto DataFrame el contenido del archivo
 
-
-class Author:
-
-    def __init__(self, author, institutions, fields, article):
-        self.author = author
-        self.institutions = institutions
-        self.fields = fields
-        self.articles = [article]
-
-
-
-class Institution:
-
-    def __init__(self, institution, author, fields, article):
-        self.institution = institution
-        self.author = author
-        self.fields = fields
-        self.articles = article
 
 authors = []
 institutions = []
 fields_of_study = []
 authors_existence = []
 institutions_existence = []
+
 
 size = data.shape[0]
 
@@ -49,13 +34,18 @@ for i in range(0, size):
                 _institutions += [k["name"]]
                 
     _fields_of_study = [i["name"] for i in data.loc[i, "fields_of_study"]]
+    year = data.loc[i,"date_published"].split("T")[0].split("-")[0]
 
     for insti in _institutions:
         if insti not in institutions_existence:
             institutions_existence += [insti]
-            institutions += [Institution(insti, _authors, _fields_of_study, [_article])]
+            institutions += [institutionInstitution.Institution(insti, _authors, _fields_of_study, [_article], year, [year])]
         else:
             pos = institutions_existence.index(insti)
+            for f in institutions:
+              if f.institution == insti:
+                f.alternative_trayectory += [year]
+                f.update_trayectory(year)
 
             for author in _authors:
                 if author not in institutions[pos].author:
@@ -71,7 +61,7 @@ for i in range(0, size):
     for c in _authors:
         if c not in authors_existence:
             authors_existence += [c]
-            authors += [Author(c, _institutions, _fields_of_study, _article)]
+            authors += [authorInstitution.Author(c, _institutions, _fields_of_study, _article)]
         else:
             pos = authors_existence.index(c)
 
@@ -114,60 +104,48 @@ def institution_info(search):
             return({"name": insti.institution,
                 "authors": insti.author,
                 "topics": insti.fields,
-                "articles": insti.articles})
+                "articles": insti.articles,
+                "Trayectory": insti.trayectory})
     else:
         return{"Nombre": "No existe"}
 
 
-"""def field_search():
-    search = ""
+def fields_search(search):
     found_fields = []
-    while search == "":
-        search = input('Introduzca Tema a buscar: ')
+    if search == "":
+        return({"field" : 'Vacio '})
     search = search.lower()
+
     for field in fields_of_study:
         if field.lower().__contains__(search):
             found_fields += [field]
 
-    while not found_fields:
-        search = input('No se ha encontrado ningún tema \n \
-         si desea salir ingrese 0 \n \
-         Introduzca tema a Buscar: ')
-        if search == "0":
-            sys.exit()
-        for field in fields_of_study:
-            if field.lower().__contains__(search):
-                found_fields += [field]
+    return {"field" : found_fields}
 
-    for pos in range(len(found_fields)):
-        print(pos, "- ", found_fields[pos])
 
-    option = ""
-    while option == "":
-        print()
-        option = input("Ingrese el número de un Tema para buscar Instituciones relevantes: ")
-        try:
-            option = int(option)
-            if int(option) < 0 or int(option) >= len(found_fields):
-                option = ""
-                print("Opción Invalida")
-        except:
-            print("Opción Invalida")
-            option = ""
+def fields_info(option):
+    if option == "":
+        return({"institutions": ""})    
 
-    option = found_fields[option]
     found_institutions = []
     for institution in institutions:
         if option in institution.fields:
-            found_institutions += [institution]
+            found_institutions += [institution.institution]
+    return {"institution" : found_institutions}
 
-    print()
-    print("Instituciones con relación al Tema: ")
-    for institution in found_institutions:
-        print(institution.institution)
-    if len(found_institutions) == 0:
-        print("No hay instituciones relacionadas con el tema ")"""
+def trayectory(insti):
+    import operator
+    for institution in institutions:
+        if institution.institution.lower() == (insti.lower()):
+            resultado = sorted(institution.trayectory.items(), key=operator.itemgetter(0))
+            resultado = {i[0] : i[1] for i in resultado}
+            return({"Trayectory": resultado})
+    else:
+        return{"Nombre": "No existe"}
 
-
+def alternative_trayectory(insti):
+    for institution in institutions:
+        if institution.institution.lower() == (insti.lower()):
+            return institution.alternative_trayectory
 
 
