@@ -70,6 +70,10 @@ for i in range(0, size):
             for field in _fields_of_study:
                 if field not in authors[pos].fields:
                     authors[pos].fields += [field]
+                if field not in authors[pos].alternative_fields :
+                    authors[pos].alternative_fields[field] = 1
+                else:
+                    authors[pos].alternative_fields[field] += 1
 
             for institution in _institutions:
                 if institution not in authors[pos].institutions:
@@ -90,9 +94,6 @@ def institution_search(search):
     for institution in institutions:
         if institution.institution.lower().__contains__(search):
             found_institutions += [institution.institution]
-
-    """if not found_institutions:
-        return {"institution" :"No se ha encontrado ninguna institución"}"""
 
     return {"institution" :  found_institutions}
 
@@ -139,7 +140,7 @@ def trayectory(insti):
         if institution.institution.lower() == (insti.lower()):
             resultado = sorted(institution.trayectory.items(), key=operator.itemgetter(0))
             resultado = {i[0] : i[1] for i in resultado}
-            return({"Trayectory": resultado})
+            return(resultado)
     else:
         return{"Nombre": "No existe"}
 
@@ -147,5 +148,11 @@ def alternative_trayectory(insti):
     for institution in institutions:
         if institution.institution.lower() == (insti.lower()):
             return institution.alternative_trayectory
+
+def author_field_search(author):
+    author = author.lower()
+    for aut in authors:
+        if aut.author.lower().__contains__(author):
+            return aut.alternative_fields
 
 
