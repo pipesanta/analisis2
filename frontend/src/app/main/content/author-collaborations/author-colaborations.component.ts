@@ -18,18 +18,16 @@ export class AuthorColaborationsComponent implements OnInit, OnDestroy {
   resultList = [];
   articleList = [];
 
+  showLegend =  true;
+
 
 
   // chart 01
 
 
-  doughnutChartLabels = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-  doughnutChartData =  [
-    [350, 450, 100],
-    [50, 150, 120],
-    [250, 130, 70],
-  ];
-  doughnutChartType: ChartType = 'doughnut';
+  doughnutChartLabels = ["felipe", "samuel"];
+  doughnutChartData =  [ [ 350, 120 ] ];
+  doughnutChartType = 'doughnut';
 
   // chart 01
 
@@ -37,40 +35,30 @@ export class AuthorColaborationsComponent implements OnInit, OnDestroy {
 
 
   // Pie
-  public pieChartOptions = {
-    responsive: true,
-    legend: {
-      position: 'top',
-    },
-    plugins: {
-      datalabels: {
-        formatter: (value, ctx) => {
-          const label = ctx.chart.data.labels[ctx.dataIndex];
-          return label;
-        },
-      },
-    }
-  };
-  public pieChartLabels = [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'];
-  public pieChartData: number[] = [300, 500, 100];
-  public pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
-  // public pieChartPlugins = [pluginDataLabels];
-  public pieChartColors = [
-    {
-      backgroundColor: ['rgba(255,0,0,0.3)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)'],
-    },
-  ];
-
-
-  // chart02
-
-
-
-
-
-
-
+  // public pieChartOptions = {
+  //   responsive: true,
+  //   legend: {
+  //     position: 'top',
+  //   },
+  //   plugins: {
+  //     datalabels: {
+  //       formatter: (value, ctx) => {
+  //         const label = ctx.chart.data.labels[ctx.dataIndex];
+  //         return label;
+  //       },
+  //     },
+  //   }
+  // };
+  // public pieChartLabels = [];
+  // public pieChartData= [];
+  // public pieChartType = 'pie';
+  // public pieChartLegend = true;
+  // // public pieChartPlugins = [pluginDataLabels];
+  // public pieChartColors = [
+  //   {
+  //     backgroundColor: ['rgba(255,0,0,0.3)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)'],
+  //   },
+  // ];
 
 
   constructor(
@@ -106,27 +94,71 @@ export class AuthorColaborationsComponent implements OnInit, OnDestroy {
         }),
         debounceTime(500),
         tap(filterText => console.log('Buscar por el author que conicida con  ==> ', filterText)),
-        mergeMap(filterText => this.authorCollaborationsService.getArticlesByAuthor$(filterText))
+        mergeMap(filterText => this.authorCollaborationsService.getArticlesByAuthor$(filterText)),
+        filter((list: any) => list.length > 0)
       )
       .subscribe((results : any[]) => {
         console.log("##########################");
         console.log(results);
 
+        // this.doughnutChartLabels = [];
+        // this.doughnutChartData = [ [] ];
+
+        const allFields = [];
+        const fieldsMap = {};
+
+
         
         this.articleList = results
-          .map(item => ({
-            name: item.title,
-            fields_of_study: item.fieldsOfStudy,
-            mainAuthor: { name: item.author.name, lastName : item.author.surname },
-            authorsColab: item.collaborators.map(i => ({ name: i.name, lastName: i.surname }) )
-          }));
-          
+          .map(item => {
+            allFields.push(...item.fieldsOfStudy)
+            return ({
+              name: item.title,
+              fields_of_study: item.fieldsOfStudy.join(", "),
+              mainAuthor: { name: item.author.name, lastName : item.author.surname },
+              authorsColab: item.collaborators.map(i => ({ name: i.name, lastName: i.surname }) )
+            })
+          });
 
-        //   console.log(this.articleList);
-      }
+        allFields.forEach(item => {
+          if(!fieldsMap[item]){
+            fieldsMap[item] = 1;
+          }else{
+            fieldsMap[item]++;
+          }
+        });
 
 
-      );
+        allFields.forEach(item => {
+          if(!fieldsMap[item]){
+            fieldsMap[item] = 1
+          }else{
+            fieldsMap[item] = fieldsMap[item] + 1;
+          }
+        });
+
+        console.log(fieldsMap);
+        const labels = [];
+        const dataValues = [];
+
+        Object.keys(fieldsMap)
+          .forEach(key => {
+            labels.push(key);
+            dataValues.push(fieldsMap[key]);
+          });
+
+
+        this.doughnutChartLabels = labels;
+        this.doughnutChartData[0] = dataValues;
+
+        this.showLegend = this.doughnutChartLabels.length < 15;
+
+
+
+
+
+
+      });
   }
 
   showResults(results: any[]): void {

@@ -5,7 +5,7 @@
   <!-- / TOP BACKGROUND -->
 
   <!-- CENTER -->
-  <div class="center" >
+  <div class="center">
 
     <!-- HEADER -->
     <div class="header white-fg" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
@@ -27,10 +27,10 @@
           <input id="search" [formControl]="filterTextControl" matInput placeholder="Autor a consultar">
         </mat-form-field>
 
-        <mat-radio-group aria-label="Select an option">
+        <!-- <mat-radio-group aria-label="Select an option">
           <mat-radio-button value="1" color="warm">ISSN</mat-radio-button>
           <mat-radio-button value="2">Author 2</mat-radio-button>
-        </mat-radio-group>
+        </mat-radio-group> -->
 
 
       </div>
@@ -43,15 +43,51 @@
     <!-- / HEADER -->
 
     <!-- CONTENT CARD [CODE HERE]  -->
-    <div class="content-card mat-white-bg" fusePerfectScrollbar >
+    <div class="content-card mat-white-bg" fusePerfectScrollbar>
 
 
       <!-- <chart [type]="type" [data]="data" [options]="options"></chart> -->
+      <button mat-stroked-button (click)="showLegend = !showLegend">
+        Ver/ocultar encabezado
+      </button>
+
+      <!-- chart 01 -->
+      <div *ngIf="doughnutChartLabels.length > 1">
+        <div>
+          <div style="display: block">
+            <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [legend]="showLegend"
+              [chartType]="doughnutChartType">
+            </canvas>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- chart 01 -->
+
+
+      <!-- chart 02 -->
+      <!-- <div *ngIf="pieChartLabels.length > 0" >
+          <div>  
+            <div class="chart">
+              <canvas baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [chartType]="pieChartType"
+                [options]="pieChartOptions"
+                [colors]="pieChartColors"
+                [legend]="pieChartLegend">
+              </canvas>
+            </div>
+          </div>
+        </div> -->
+      <!-- chart 02 -->
 
 
       <div *ngFor="let item of articleList" class="article-item">
         <div class="info-tittle">Titulo: {{ item.name }}</div>
-        
+
         <div class="info-autor">Autor principal: {{ item.mainAuthor.name + " " + item.mainAuthor.lastName  }} </div>
         <div class="info">Campos de Estudio: {{ item.fields_of_study }} </div>
         <h2>Colaboró con:</h2>
@@ -64,42 +100,11 @@
         <!-- <div class="info">Colaboró con: {{ item.fields_of_study }} </div> -->
 
         <!-- <div>Autor principal: {{ item.mainAuthor.name }} </div> -->
-        
+
       </div>
 
-      <!-- chart 01 -->
-      <div>
-        <div>
-          <div style="display: block">
-            <canvas baseChart
-              [data]="doughnutChartData"
-              [labels]="doughnutChartLabels"
-              [chartType]="doughnutChartType">
-            </canvas>
-          </div>
-        </div>
-      </div>
 
-      <!-- chart 01 -->
 
-      <!-- chart 02 -->
-      <div>
-        <div>
-
-            <!-- [plugins]="pieChartPlugins" -->
-          <div class="chart">
-            <canvas baseChart
-              [data]="pieChartData"
-              [labels]="pieChartLabels"
-              [chartType]="pieChartType"
-              [options]="pieChartOptions"
-              [colors]="pieChartColors"
-              [legend]="pieChartLegend">
-            </canvas>
-          </div>
-        </div>
-      </div>
-      <!-- chart 02 -->
 
     </div>
     <!-- / CONTENT CARD -->

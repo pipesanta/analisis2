@@ -8,7 +8,7 @@ articlesLength = len(data)
 # print("EL total de articulos son : " + str(len(data)))
 
 class Article:
-  def __init__(self, isnns, title, year, publicationType, language, author, colaborators):
+  def __init__(self, isnns, title, year, publicationType, language, author, colaborators, fieldsOfStudy):
     self.isnns = isnns
     self.title = title
     self.year = year
@@ -16,6 +16,7 @@ class Article:
     self.language = language
     self.author = author
     self.colaborators = colaborators
+    self.fieldsOfStudy = fieldsOfStudy
     
   def printInfo(self):
     print("-----------------------------------------------")
@@ -42,7 +43,7 @@ class Article:
       "language": self.language or "",
       "author": self.author.parseToJson(),
       "collaborators": collaboratorAsJson,
-      "fieldsOfStudy": []
+      "fieldsOfStudy": self.fieldsOfStudy
     }
 
 
@@ -74,6 +75,7 @@ def buildArticle(index):
   year = data["year_published"][index] or 0
   language = data["languages"][index] or []
   
+  
   mainAuthorRef = data["authors"][index][0]
   colaboratorsRef = data["authors"][index][1:]
   
@@ -93,8 +95,11 @@ def buildArticle(index):
     authorColaborator=Author(colaboratorName, colaboratorSurname, None)
     colaborators.append(authorColaborator)
   
+  fieldsOfStudy = []
+  for item in data["fields_of_study"][index]:
+    fieldsOfStudy.append(item["name"])
   
-  article = Article(isnns, title, year, publicationType, language, mainAuthor, colaborators )
+  article = Article(isnns, title, year, publicationType, language, mainAuthor, colaborators, fieldsOfStudy )
   return article
   
   
