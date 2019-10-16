@@ -13,7 +13,7 @@
             <!-- APP TITLE -->
             <div class="logo my-12 m-sm-0" fxLayout="row" fxLayoutAlign="start center">
                 <mat-icon class="logo-icon mr-16" *fuseIfOnDom>bookmark</mat-icon>
-                <span class="logo-text h1">Caracterización de autores</span>
+                <span class="logo-text h1">Detalle de institución</span>
             </div>
             <!-- / APP TITLE -->
         </div>
@@ -42,7 +42,7 @@
                                 <li class="list-group-item">{{ item }}</li>
                             </div>
                         </ul>
-                        <br/>
+                        <br />
                         <div class="contenedorTitulos">
 
                             <h2>Campos de estudio:</h2>
@@ -69,8 +69,18 @@
                     </aside>
                 </section>
 
+
+                <div class="flex">
+                    <div class="flex-item">
+                        <div style="display: block;">
+                            <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType">
+                            </canvas>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- / CONTENT CARD -->
             </div>
-            <!-- / CONTENT CARD -->
+            <!-- / CENTER -->
         </div>
-        <!-- / CENTER -->
     </div>

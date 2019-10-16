@@ -4,7 +4,6 @@ import { SharedModule } from '../../../core/modules/shared.module';
 import { DatePipe } from '@angular/common';
 import { FuseWidgetModule } from '../../../core/components/widget/widget.module';
 
-import { ChartsModule } from 'ng2-charts';
 import { AuthorColaborationsComponent } from './author-colaborations.component';
 import { AuthorColaborationsService } from './author-colaborations.service';
 
@@ -19,8 +18,7 @@ const routes: Routes = [
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
-    FuseWidgetModule,
-    ChartsModule
+    FuseWidgetModule
   ],
   declarations: [
     AuthorColaborationsComponent    

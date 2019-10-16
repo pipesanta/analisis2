@@ -1,74 +1,47 @@
 ////////// ANGULAR //////////
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { filter, tap, mergeMap, debounceTime } from 'rxjs/operators';
+import { filter, tap, mergeMap, debounceTime, merge, map } from 'rxjs/operators';
 import { InstitutionsIctivityCharacterisationService } from '../institutions-activity-characterisation.service';
 import {Router} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   // tslint:disable-next-line: component-selector
-  selector: 'inst-characterisation',
+  selector: 'fields-details',
   templateUrl: './fields-study.component.html',
   styleUrls: ['./fields-study.component.scss']
 })
-export class FieldsStudyComponent implements OnInit, OnDestroy {
+export class FieldsDetailsComponent implements OnInit, OnDestroy {
 
-  filterTextControl = new FormControl('');
-  resultList = [];
-  institutionList = [];
+  fieldInfo = null;
 
   constructor(
     private institutionsIctivityCharacterisationService: InstitutionsIctivityCharacterisationService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute 
   ) {
 
   }
 
   ngOnInit() {
-    this.listenSearchbar();
-
+  this.loadFieldData();
   }
 
-
-  listenSearchbar() {
-    this.filterTextControl.valueChanges
+  loadFieldData(){
+    this.route.params
       .pipe(
-        filter((filterText: any) => {
-          return filterText != null && filterText !== '';
-        }),
-        debounceTime(500),
-        tap(filterText => console.log('Buscar por el author que coincida con  ==> ', filterText)),
-        mergeMap(filterText => this.institutionsIctivityCharacterisationService.searchFields$(filterText)),
-
+        map( params => params.id ),
+        mergeMap(id => this.institutionsIctivityCharacterisationService.getFieldsInfo$(id) )
       )
-      .subscribe((results: any) => {
-
-        this.institutionList = results.institution;
-        console.log('La respuesta ==> ', results);
-      }
-
-
-      );
-  }
-
-  showResults(results: any[]): void {
-    console.log('Mostrar los sisguientes resultados ==> ', results);
+    .subscribe((data: any) => {
+        data.name =  data.institutions || 'No hay instituciones';
+        this.fieldInfo = data;
+    });
   }
 
   ngOnDestroy() {
-
-
-
-
   }
-
-  navigateToDetail(id: string){
-    console.log("se dio click en => ", id );
-    this.router.navigateByUrl('/institutions-activity-characterisation/field/' + id );
-
-  }
-
-
-
 
 }

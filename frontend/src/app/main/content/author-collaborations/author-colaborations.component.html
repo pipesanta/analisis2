@@ -67,6 +67,40 @@
         
       </div>
 
+      <!-- chart 01 -->
+      <div>
+        <div>
+          <div style="display: block">
+            <canvas baseChart
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              [chartType]="doughnutChartType">
+            </canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- chart 01 -->
+
+      <!-- chart 02 -->
+      <div>
+        <div>
+
+            <!-- [plugins]="pieChartPlugins" -->
+          <div class="chart">
+            <canvas baseChart
+              [data]="pieChartData"
+              [labels]="pieChartLabels"
+              [chartType]="pieChartType"
+              [options]="pieChartOptions"
+              [colors]="pieChartColors"
+              [legend]="pieChartLegend">
+            </canvas>
+          </div>
+        </div>
+      </div>
+      <!-- chart 02 -->
+
     </div>
     <!-- / CONTENT CARD -->
   </div>
