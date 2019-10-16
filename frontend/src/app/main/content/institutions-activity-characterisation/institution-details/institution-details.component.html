@@ -26,7 +26,7 @@
         <div class="content-card mat-white-bg" fusePerfectScrollbar>
 
             <div class="container">
-                <div class="divTitle">
+                <div *ngIf="institutioinInfo" class="divTitle">
                     <h1 class="mainTitle">{{ institutioinInfo.name }}</h1>
                 </div>
                 <section class="main row">
@@ -37,7 +37,7 @@
                             <h2>Artículos</h2>
                         </div>
 
-                        <ul class="list-group list-group-flush">
+                        <ul *ngIf="institutioinInfo && institutioinInfo.articles" class="list-group list-group-flush">
                             <div *ngFor="let item of institutioinInfo.articles">
                                 <li class="list-group-item">{{ item }}</li>
                             </div>
@@ -49,7 +49,7 @@
                         </div>
 
 
-                        <ul class="list-group list-group-flush">
+                        <ul *ngIf="institutioinInfo && institutioinInfo.topics" class="list-group list-group-flush">
                             <div *ngFor="let item of institutioinInfo.topics">
                                 <li class="list-group-item">{{ item }}</li>
                             </div>
@@ -57,7 +57,7 @@
                     </article>
                     <aside class="col-xs-12 col-sm-5 col-md-4 col-lg-4">
 
-                        <ul class="list-group">
+                        <ul *ngIf="institutioinInfo && institutioinInfo.authors" class="list-group">
                             <div class="contenedorTitulos">
                                 <h2>Autores</h2>
                             </div>

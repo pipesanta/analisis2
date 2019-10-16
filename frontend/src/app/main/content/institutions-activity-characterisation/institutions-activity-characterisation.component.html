@@ -28,9 +28,9 @@
                     <input id="search" [formControl]="filterTextControl" matInput placeholder="Búsqueda">
                 </mat-form-field>
 
-                <mat-radio-group aria-label="Select an option">
-                    <mat-radio-button value="1" color="warm">Institución</mat-radio-button>
-                    <mat-radio-button value="2">Campo de estudio</mat-radio-button>
+                <mat-radio-group aria-label="Select an option" (change)="updateSelection($event)">
+                    <mat-radio-button value="INSTITUTION" color="warm">Institución</mat-radio-button>
+                    <mat-radio-button value="FIELD">Campo de estudio</mat-radio-button>
                 </mat-radio-group>
 
 
@@ -42,7 +42,7 @@
         <!-- CONTENT CARD [CODE HERE]  -->
         <div class="content-card mat-white-bg" fusePerfectScrollbar>
             <div class="list-group">
-                <div *ngFor="let item of institutionList" (click)="navigateToDetail(item)" class="bordecito">
+                <div *ngFor="let item of resultList" (click)="navigateToDetail(item)" class="bordecito">
                     <a style="text-decoration:none " class="list-group-item list-group-item-action"><span class="institution">{{ item }}</span></a>
                 </div>
             </div>

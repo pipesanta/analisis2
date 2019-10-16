@@ -1,7 +1,8 @@
 ////////// ANGULAR //////////
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { filter, tap, mergeMap, debounceTime } from 'rxjs/operators';
+import { filter, tap, mergeMap, debounceTime, startWith } from 'rxjs/operators';
+import { combineLatest, Subject, of} from 'rxjs';
 import { InstitutionsIctivityCharacterisationService } from './institutions-activity-characterisation.service';
 import {Router} from '@angular/router';
 
@@ -15,7 +16,7 @@ export class InstitutionsActivityCharacterisationComponent implements OnInit, On
 
   filterTextControl = new FormControl('');
   resultList = [];
-  institutionList = [];
+  typeSelected$ = new Subject<null>();
 
   constructor(
     private institutionsIctivityCharacterisationService: InstitutionsIctivityCharacterisationService,
@@ -31,24 +32,49 @@ export class InstitutionsActivityCharacterisationComponent implements OnInit, On
 
 
   listenSearchbar() {
-    this.filterTextControl.valueChanges
-      .pipe(
-        filter((filterText: any) => {
-          return filterText != null && filterText !== '';
-        }),
-        debounceTime(500),
-        tap(filterText => console.log('Buscar por el author que coincida con  ==> ', filterText)),
-        mergeMap(filterText => this.institutionsIctivityCharacterisationService.searchInstitutions$(filterText)),
 
-      )
-      .subscribe((results: any) => {
+    combineLatest(
+      this.filterTextControl.valueChanges.pipe( startWith(""), debounceTime(500)),
+      this.typeSelected$.pipe(startWith("INSTITUTION"))
+    ).pipe(
+      filter(([filterText, type ]) => filterText !== '' ),
+      mergeMap( ([filterText, type]) => {
 
-        this.institutionList = results.institution;
-        console.log('La respuesta ==> ', results);
+        if(type === 'INSTITUTION'){
+          return this.institutionsIctivityCharacterisationService.searchInstitutions$(filterText)
+        }else if(type === 'FIELD'){
+          return this.institutionsIctivityCharacterisationService.searchFields$(filterText)
+        }else {
+          return of({});
+        }
+        
+      } )
+    ).subscribe(
+      (result: any) => {
+        this.resultList = [];
+        this.resultList = result.field || result.institution;
+        console.log(this.resultList);
       }
+    )
+
+    // this.filterTextControl.valueChanges
+    //   .pipe(
+    //     filter((filterText: any) => {
+    //       return filterText != null && filterText !== '';
+    //     }),
+    //     debounceTime(500),
+    //     tap(filterText => console.log('Buscar por el author que coincida con  ==> ', filterText)),
+    //     mergeMap(filterText => this.institutionsIctivityCharacterisationService.searchInstitutions$(filterText)),
+
+    //   )
+    //   .subscribe((results: any) => {
+
+    //     this.institutionList = results.institution;
+    //     console.log('La respuesta ==> ', results);
+    //   }
 
 
-      );
+    //   );
   }
 
   showResults(results: any[]): void {
@@ -60,6 +86,10 @@ export class InstitutionsActivityCharacterisationComponent implements OnInit, On
 
 
 
+  }
+
+  updateSelection(event: any){
+    this.typeSelected$.next(event.value);
   }
 
   navigateToDetail(id: string){
