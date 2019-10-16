@@ -8,6 +8,8 @@ import { ChartsModule } from 'ng2-charts';
 import { JournalsCharacterisationComponent } from './journals-characterisation.component';
 import { JournalsCharacterisationService } from './journals-characterisation.service';
 
+import {MatButtonModule} from '@angular/material/button';
+
 const routes: Routes = [
   {
     path: '',
@@ -15,17 +17,20 @@ const routes: Routes = [
   }
 ];
 
+
 @NgModule({
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
     FuseWidgetModule,
-    ChartsModule
+    ChartsModule,
+    MatButtonModule
   ],
   declarations: [
-    JournalsCharacterisationComponent    
+    JournalsCharacterisationComponent
   ],
   providers: [ JournalsCharacterisationService, DatePipe]
 })
 
 export class JournalsCharacterisationModule {}
+export class ButtonTypesExample {}
