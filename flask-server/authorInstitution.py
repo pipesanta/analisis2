@@ -5,4 +5,4 @@ class Author:
         self.institutions = institutions
         self.fields = fields
         self.articles = [article]
-        self.alternative_fields = {}
+        self.alternative_fields = {i : 1 for i in fields}
