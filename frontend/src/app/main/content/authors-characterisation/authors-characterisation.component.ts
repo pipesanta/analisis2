@@ -42,13 +42,10 @@ export class AuthorsCharacterisationComponent implements OnInit, OnDestroy {
        
 
         //this.resultList = results;
-        var resultados = JSON.parse(results.toString('utf8'));
+        var resultados = JSON.parse(results);
         if (resultados != null) {
           for (var i = 0; i < resultados.length; i++) {
             var obj = resultados[i];
-            
-            
-            //console.log(obj);
 
             data.push(obj);
             
@@ -62,6 +59,7 @@ export class AuthorsCharacterisationComponent implements OnInit, OnDestroy {
               Nombre: " ",
               Area: " ",
               Institucion: " ",
+              nacionalidad:" ",
               Articulos: { Nombre: "", NumeroCitas: "", ID: "" }
             }
           ]);

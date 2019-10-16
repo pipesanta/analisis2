@@ -59,11 +59,12 @@ class Articulo():
 
 class Autor():
 
-    def __init__(self, nombre, articulos, area, institucion):
+    def __init__(self, nombre, articulos, area, institucion,nacionalidad):
         self.__nombre = str(nombre)
         self.__articulos = articulos
         self.__area = str(area)
         self.__institucion = str(institucion)
+        self.__nacionalidad=str(nacionalidad)
 
     def get_nombre(self):
         return str(self.__nombre)
@@ -90,7 +91,7 @@ class Autor():
         self.__institucion = x
 
     def autorToDiccionario(self):
-        autorDiccionario = {'Nombre': str(self.__nombre), 'Articulos': self.__articulos, 'Area': str(
+        autorDiccionario = {'Nombre': str(self.__nombre), 'numArticulos': int(len(self.__articulos)), 'nacionalidad':str(self.__nacionalidad),'Articulos': self.__articulos, 'Area': str(
             self.__area), 'Institucion': str(self.__institucion)}
         return autorDiccionario
 
@@ -139,7 +140,7 @@ def listar(autor):
                 nombres.append(campo[1])
                 listaArticulos = listarArticulos(resultado, campo[1])
                 autor = Autor(nombre=campo[1], articulos=listaArticulos,
-                              area="No disponible", institucion=campo[2])
+                              area="No disponible", institucion=campo[2], nacionalidad=campo[3])
                 diccionario = autor.autorToDiccionario()
                 megaArregloAutores.append(diccionario)
 

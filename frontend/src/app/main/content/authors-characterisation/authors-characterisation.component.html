@@ -71,10 +71,11 @@
           Area: {{item.Area}}
           <br />
           Institución: {{item.Institucion}}
-
+          <br />
+          Nacionalidad: {{item.nacionalidad}}
           <br />
           <br />
-          <h3 style="font-family:georgia, garamond, serif; font-size: 20px;"> Articulos</h3>
+          <h3 style="font-family:georgia, garamond, serif; font-size: 20px;">{{item.numArticulos}} Articulos</h3>
           <hr />
           <p *ngFor="let art of item.Articulos">
             Titulo: {{art.Nombre}} <br />
