@@ -66,6 +66,13 @@ export class AuthorColaborationsComponent implements OnInit, OnDestroy {
   // chart02
 
 
+
+
+
+
+
+
+
   constructor(
     private authorCollaborationsService: AuthorColaborationsService
   ) {
