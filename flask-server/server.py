@@ -69,6 +69,13 @@ class consultaAlternativeTrayectory(Resource):
         info = consulta.alternative_trayectory(nom)
         return (info)
 
+class consultaAuthorFields(Resource):
+    def get(self,nom):
+       
+        info = consulta.author_field_search(nom)
+        return (info)
+
+
 # test
 api.add_resource(HelloWorld, '/')
 api.add_resource(Multi, '/multi/<int:num>')
@@ -80,6 +87,7 @@ api.add_resource(consultaFields, '/fields/<string:nom>')
 api.add_resource(consultaInfoFields, '/fields/information/<string:nom>')
 api.add_resource(consultaTrayectory , '/institution/trayectory/<string:nom>')
 api.add_resource(consultaAlternativeTrayectory , '/institution/alternativetrayectory/<string:nom>')
+api.add_resource(consultaAuthorFields , '/author-colaboration/fields/<string:nom>')
 
 
 
