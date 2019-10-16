@@ -68,19 +68,23 @@ class consultaAlternativeTrayectory(Resource):
        
         info = consulta.alternative_trayectory(nom)
         return (info)
-   
-api.add_resource(consultaInstitution, '/institution/<string:nom>')
-api.add_resource(consultaInfo, '/institution/information/<string:nom>')
-api.add_resource(consultaFields, '/fields/<string:nom>')
-api.add_resource(consultaInfoFields, '/fields/information/<string:nom>')
-api.add_resource(consultaTrayectory , '/institution/trayectory/<string:nom>')
-api.add_resource(consultaAlternativeTrayectory , '/institution/alternativetrayectory/<string:nom>')
+
+# test
 api.add_resource(HelloWorld, '/')
 api.add_resource(Multi, '/multi/<int:num>')
 
 # Daniela - Guti
 api.add_resource(consultaInstitution, '/institution/<string:nom>')
 api.add_resource(consultaInfo, '/institution/information/<string:nom>')
+api.add_resource(consultaFields, '/fields/<string:nom>')
+api.add_resource(consultaInfoFields, '/fields/information/<string:nom>')
+api.add_resource(consultaTrayectory , '/institution/trayectory/<string:nom>')
+api.add_resource(consultaAlternativeTrayectory , '/institution/alternativetrayectory/<string:nom>')
+
+
+
+
+
 
 # Authors Collaborations
 

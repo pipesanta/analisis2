@@ -5,9 +5,7 @@ import dataReference
 data =  dataReference.getDataRef()
 
 articlesLength = len(data)
-print("EL total de articulos son : " + str(len(data)))
-
-
+# print("EL total de articulos son : " + str(len(data)))
 
 class Article:
   def __init__(self, isnns, title, year, publicationType, language, author, colaborators):
