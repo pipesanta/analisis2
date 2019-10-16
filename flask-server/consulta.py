@@ -70,10 +70,12 @@ for i in range(0, size):
             for field in _fields_of_study:
                 if field not in authors[pos].fields:
                     authors[pos].fields += [field]
-                if field not in authors[pos].alternative_fields :
-                    authors[pos].alternative_fields[field] = 1
-                else:
+                if field in authors[pos].alternative_fields.keys():
                     authors[pos].alternative_fields[field] += 1
+                else:
+                    authors[pos].alternative_fields[field] = 1
+
+           
 
             for institution in _institutions:
                 if institution not in authors[pos].institutions:
@@ -154,5 +156,6 @@ def author_field_search(author):
     for aut in authors:
         if aut.author.lower().__contains__(author):
             return aut.alternative_fields
+          
 
 
