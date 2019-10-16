@@ -36,6 +36,7 @@ class JournalCharacterization:
 
     # Search journals with the correct search parameter and return a list with these journals
     def filter_journals(self, search_value, search_type):
+        search_value = search_value.strip()
         returned_journal_list = []
         if search_type == 'name':
             for journal in self.get_journals():

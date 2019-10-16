@@ -6,10 +6,9 @@
 
   <!-- CENTER -->
   <div class="center">
-
     <!-- HEADER -->
     <div class="header white-fg" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
-      fxLayoutAlign.gt-xs="space-between center">
+         fxLayoutAlign.gt-xs="space-between center">
 
       <!-- APP TITLE -->
       <div class="logo my-12 m-sm-0" fxLayout="row" fxLayoutAlign="start center">
@@ -19,6 +18,7 @@
       <!-- / APP TITLE -->
 
       <!-- SEARCH -->
+
       <div class="search-input-wrapper mx-12 m-md-0" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
         <label for="search" class="mr-8">
           <mat-icon class="secondary-text">search</mat-icon>
@@ -26,59 +26,89 @@
         <mat-form-field floatPlaceholder="never" fxFlex="1 0 auto">
           <input id="search" [formControl]="filterTextControl" matInput placeholder="Revista a consultar">
         </mat-form-field>
+      </div>
 
+      <!--
         <mat-radio-group aria-label="Select an option">
-          <mat-radio-button value="1" >Nombre</mat-radio-button>
-          <mat-radio-button value="2" >ISSN</mat-radio-button>
-        </mat-radio-group>
+          <mat-radio-button value="1">Nombre</mat-radio-button>
+          <mat-radio-button value="2">ISSN</mat-radio-button>
+        </mat-radio-group>->
+      -->
+      <div class="example-button-row">
+        <div> <button mat-flat-button (click)="clickName($event)" style="align-items: stretch;background-color: #394a6d; margin: 2px"> Buscar por
+          nombre</button></div>
 
+        <div><button mat-flat-button (click)="clickIssn($event)" color="accent" style="background-color: #394a6d; margin: 2px" >Buscar por ISSN</button></div>
 
       </div>
+
+      <!--
+      <form class="form-inline mx-12 m-md-1">
+        <input class="mr-sm-2" id="search" type="text" [(ngModel)]="searchValue" matInput placeholder="Revista a consultar">
+        <button mat-flat-button (click)="onSubmit($event, 'name')" style="align-items: stretch;background-color: #394a6d; margin: 2px" type="submit">Buscar por Nombre</button>
+        <button mat-flat-button (click)="onSubmit($event, 'issn')" color="accent" style="background-color: #394a6d; margin: 2px" type="submit">Buscar por Issn</button>
+      </form>
+      -->
       <!-- / SEARCH -->
     </div>
     <!-- / HEADER -->
 
     <!-- CONTENT CARD [CODE HERE]  -->
     <div class="content-card mat-white-bg">
-
       <mat-accordion class="example-headers-align"  *ngFor="let item of resultList">
-        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+        <mat-expansion-panel  hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title >
               {{item.title_full}}
             </mat-panel-title>
-            
           </mat-expansion-panel-header>
-      
-            Area: {{item.publisher}}
-            <br/>
-            Institución: {{item.country}}
+          Publisher: {{item.publisher}}
+          <br/>
+          Country: {{item.country}}
+          <br/>
+          <br/>
+          <h3> Volumes</h3>
 
-            <br/>
-            <br/>
-            <h3> Articulos</h3>
+          <mat-expansion-panel hideToggle>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title >
+                <h3> Volumes</h3>
+              </mat-panel-title>
+
+            </mat-expansion-panel-header>
+
             <hr/>
-            <p *ngFor="let art of item.Articulos">
-
-              ------------------------------------------------------------------------------<br/>
-              Titulo: {{art.name}} <br />
+            <div *ngFor="let volume of item.volumes">
+              <p></p>
+              Volumen: {{volume.volume}} <br />
               <br />
-              Citas: {{art.NumeroCitas}} <br />
-              <br />
-              ID: {{art.ID}}
-              <br/>
-              <br/>
-            </p>
-            <hr/>
-
-      
-          <mat-action-row>
-            <button mat-button color="primary" (click)="nextStep()">Next</button>
-          </mat-action-row>
+              <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title >
+                    <h4>Issues</h4>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div *ngFor="let iss of volume.issues">
+                  Issue: {{iss.issue}} <br />
+                  <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title >
+                        <h4>Articles</h4>
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p></p>
+                    <div *ngFor="let art of iss.articles">
+                      Article: {{art}} <br />
+                    </div>
+                  </mat-expansion-panel>
+                </div>
+                <br />
+                <br/>
+              </mat-expansion-panel>
+            </div>
+          </mat-expansion-panel>
         </mat-expansion-panel>
-      
-        
-      
       </mat-accordion>
     </div>
     <!-- / CONTENT CARD -->

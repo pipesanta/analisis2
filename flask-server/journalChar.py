@@ -20,7 +20,7 @@ api = Api(app)
 class QueryJournalsApi(Resource):
     def get(self, search_value):
         
-        search_value=unquote(search_value)
+        search_value = unquote(search_value)
         s_values = search_value.split('>')
         s_value = s_values[0]
         s_type = s_values[1]
@@ -33,4 +33,4 @@ class QueryJournalsApi(Resource):
 api.add_resource(QueryJournalsApi, '/authorsCharacterisation/<string:search_value>')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug = True)

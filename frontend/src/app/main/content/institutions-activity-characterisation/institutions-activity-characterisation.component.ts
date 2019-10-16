@@ -5,6 +5,7 @@ import { filter, tap, mergeMap, debounceTime, startWith } from 'rxjs/operators';
 import { combineLatest, Subject, of} from 'rxjs';
 import { InstitutionsIctivityCharacterisationService } from './institutions-activity-characterisation.service';
 import {Router} from '@angular/router';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -16,7 +17,7 @@ export class InstitutionsActivityCharacterisationComponent implements OnInit, On
 
   filterTextControl = new FormControl('');
   resultList = [];
-  typeSelected$ = new Subject<null>();
+  typeSelected$ = new BehaviorSubject('INSTITUTION');
 
   constructor(
     private institutionsIctivityCharacterisationService: InstitutionsIctivityCharacterisationService,
@@ -35,8 +36,8 @@ export class InstitutionsActivityCharacterisationComponent implements OnInit, On
 
     combineLatest(
       this.filterTextControl.valueChanges.pipe( startWith(""), debounceTime(500)),
-      this.typeSelected$.pipe(startWith("INSTITUTION"))
-    ).pipe(
+      this.typeSelected$
+      ).pipe(
       filter(([filterText, type ]) => filterText !== '' ),
       mergeMap( ([filterText, type]) => {
 
@@ -56,25 +57,6 @@ export class InstitutionsActivityCharacterisationComponent implements OnInit, On
         console.log(this.resultList);
       }
     )
-
-    // this.filterTextControl.valueChanges
-    //   .pipe(
-    //     filter((filterText: any) => {
-    //       return filterText != null && filterText !== '';
-    //     }),
-    //     debounceTime(500),
-    //     tap(filterText => console.log('Buscar por el author que coincida con  ==> ', filterText)),
-    //     mergeMap(filterText => this.institutionsIctivityCharacterisationService.searchInstitutions$(filterText)),
-
-    //   )
-    //   .subscribe((results: any) => {
-
-    //     this.institutionList = results.institution;
-    //     console.log('La respuesta ==> ', results);
-    //   }
-
-
-    //   );
   }
 
   showResults(results: any[]): void {
@@ -92,10 +74,17 @@ export class InstitutionsActivityCharacterisationComponent implements OnInit, On
     this.typeSelected$.next(event.value);
   }
 
-  navigateToDetail(id: string){
-    console.log("se dio click en => ", id );
-    this.router.navigateByUrl('/institutions-activity-characterisation/detail/' + id );
 
+  navigateToDetail(id: string){
+    const tipo = this.typeSelected$.getValue();
+    console.log("se dio click en => ", id );
+    if (tipo === 'INSTITUTION'){
+      this.router.navigateByUrl('/institutions-activity-characterisation/detail/' + id );
+    }else if (tipo === 'FIELD'){
+      this.router.navigateByUrl('/institutions-activity-characterisation/field-detail/' + id );
+    }
+      
+    
   }
 
 

@@ -6,6 +6,7 @@ import { InstitutionsIctivityCharacterisationService } from '../institutions-act
 import {Router} from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { BaseChartDirective } from 'ng2-charts';
+import { forkJoin } from 'rxjs';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -26,7 +27,7 @@ export class InstitutionDetailsComponent implements OnInit, OnDestroy {
   public lineChartData = [
     { data: [] /*[90, 59, 80, 81, 56, 55, 40]*/, label: 'Series A' },
   ];
-  public lineChartLabels = []// ['Medicina', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChartLabels = [] // ['Medicina', 'February', 'March', 'April', 'May', 'June', 'July'];
   public lineChartOptions = {
     responsive: true,
     scales: {
@@ -111,25 +112,7 @@ export class InstitutionDetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadInstitutionData();
 
-    const response = {
-      medicina: 34,
-      casas: 45,
-      hola: 456,
-      medicina_en: 34,
-      casas_we: 45,
-      hola_23: 456
-    };
-
-    this.lineChartData[0].label = 'El titulo de la grafica';
-
-    Object.keys(response).forEach(att => {
-      this.lineChartLabels.push(att);
-      this.lineChartData[0].data.push(response[att]);
-    });
-
-    console.log(this.lineChartData);
-    console.log(this.lineChartLabels);
-
+    
 
 
 
@@ -139,22 +122,34 @@ export class InstitutionDetailsComponent implements OnInit, OnDestroy {
     this.route.params
       .pipe(
         map( params => params.id ),
-        mergeMap(id => this.institutionsIctivityCharacterisationService.getInstitutionInfo$(id) )
+        mergeMap(id =>  forkJoin(
+          this.institutionsIctivityCharacterisationService.getInstitutionInfo$(id), 
+          this.institutionsIctivityCharacterisationService.getTrayectory$(id)
+        ))
       )
-    .subscribe((data: any) => {
+    .subscribe((datas: any) => {
+        const data = datas[0];
         data.name =  data.name || 'Sin nombre';
         data.authors = data.authors || 'No hay autores correspondientes';
         data.topics = data.topics || 'No hay campos de estudio';
         data.articles = data.articles || 'No hay artículos';
         this.institutioinInfo = data;
+        const trayectoryInfo = datas[1];
+        console.log(trayectoryInfo);
+        this.lineChartData[0].label = 'El titulo de la grafica';
+        Object.keys(trayectoryInfo).forEach(att => {
+        this.lineChartLabels.push(att);
+        this.lineChartData[0].data.push(trayectoryInfo[att]);
+    });
+
+    console.log(this.lineChartData);
+    console.log(this.lineChartLabels);
+
     });
   }
 
   ngOnDestroy() {
-
-
-
-
+    
   }
 
 }

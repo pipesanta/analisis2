@@ -17,16 +17,58 @@
     }
 }
 
+.mainTitle {
+    font-size: 40px;
+    font-weight: bold;
+}
+
 .red-text {
     color: red;
 }
 
-.institution {
-    font-size: 20px;
-    color: #2F4F4F;
+h2 {
+    font-weight: bold;
 }
 
-.bordecito {
-    margin: 5px;
+.divTitle {
+    padding: 40px;
+}
+
+.institutionItem {
     padding: 3px;
+    border: 1px solid;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.encabezado {
+    background: #452745;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.main {
+    background: #f2f2f2;
+    margin-bottom: 20px;
+}
+
+.widgets {
+    margin-bottom: 20px;
+}
+
+.widget {
+    background: #f2f2f2;
+}
+
+.color {
+    background: #d2d2d2;
+}
+
+footer {
+    background: #452745;
+    color: #fff;
+}
+
+.contenedorTitulos {
+    padding: 10px;
 }

@@ -7,8 +7,8 @@ import { FuseWidgetModule } from '../../../core/components/widget/widget.module'
 import { ChartsModule } from 'ng2-charts';
 import { InstitutionsActivityCharacterisationComponent } from './institutions-activity-characterisation.component';
 import { InstitutionsIctivityCharacterisationService } from './institutions-activity-characterisation.service';
-
 import { InstitutionDetailsComponent } from './institution-details/institution-details.component';
+import { FieldsDetailsComponent } from './fields-study/fields-study.component';
 
 const routes: Routes = [
   {
@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'detail/:id',
     component: InstitutionDetailsComponent,
+  },
+  {
+    path: 'field-detail/:id',
+    component: FieldsDetailsComponent
   }
 ];
 
@@ -29,7 +33,7 @@ const routes: Routes = [
     ChartsModule
   ],
   declarations: [
-    InstitutionsActivityCharacterisationComponent, InstitutionDetailsComponent
+    InstitutionsActivityCharacterisationComponent, InstitutionDetailsComponent, FieldsDetailsComponent
   ],
   providers: [ InstitutionsIctivityCharacterisationService, DatePipe]
 })

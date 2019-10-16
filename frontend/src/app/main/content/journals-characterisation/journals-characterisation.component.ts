@@ -11,23 +11,53 @@ import { JournalsCharacterisationService } from './journals-characterisation.ser
   templateUrl: './journals-characterisation.component.html',
   styleUrls: ['./journals-characterisation.component.scss']
 })
+
+/**
+ * @title Button varieties
+ */
+@Component({
+  selector: 'example-button-row',
+  templateUrl: 'journals-characterisation.component.html',
+  styleUrls: ['journals-characterisation.component.scss'],
+})
+
 export class JournalsCharacterisationComponent implements OnInit, OnDestroy {
 
+  searchValue = new FormControl('');
   filterTextControl = new FormControl('');
   resultList = [];
 
   constructor(
     private journalsCharacterisationService: JournalsCharacterisationService
-    
+
   ) {
 
   }
 
   ngOnInit() {
-    this.listenSearchbar();    
+    this.listenSearchbar();
 
   }
 
+  /*
+  onSubmit(event: any, searchType): void {
+    let filterText = event.target.search.value;
+    console.log(searchType);
+    console.log(filterText);
+  }
+  */
+
+  clickName(event) {
+    // just added console.log which will display the event details in browser on click of the button.
+    alert('Buscando por nombre');
+    console.log(event);
+  }
+
+  clickIssn(event) {
+    // just added console.log which will display the event details in browser on click of the button.
+    alert('Buscando por ISSN');
+    console.log(event);
+  }
 
   listenSearchbar() {
     this.filterTextControl.valueChanges
@@ -36,25 +66,25 @@ export class JournalsCharacterisationComponent implements OnInit, OnDestroy {
           return filterText != null && filterText !== '';
         }),
         debounceTime(50),
-        tap(filterText => console.log('Buscar por el revista que conicida con  ==> ', filterText)),
+        tap(filterText => console.log('Buscar por el revista que conicida con  ==> ', filterText + '>' + 'issn')),
         mergeMap(filterText => this.journalsCharacterisationService.searchJournals$(filterText))
       )
       .subscribe((results: any) => {
-        console.log(results); 
-        var data= new Array();
-        //this.resultList = results;
-        for(var i = 0; i < results.length; i++) {
-          var obj = results[i];
-      
-          //console.log(obj);
+        console.log(results);
+          // tslint:disable-next-line:prefer-const
+        let data = [];
+        for (let i = 0; i < results.length; i++) {
+          const obj = results[i];
+          // console.log(obj);
           data.push(obj);
         }
-        this.resultList=data;
-        
-       
+        this.resultList = data;
+        results = null;
+
+
       }
-      
-      
+
+
 
       );
   }
@@ -68,7 +98,7 @@ export class JournalsCharacterisationComponent implements OnInit, OnDestroy {
 
   }
 
- 
+
 }
 
 

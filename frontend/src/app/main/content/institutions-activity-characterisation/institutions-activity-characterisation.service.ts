@@ -33,6 +33,8 @@ export class InstitutionsIctivityCharacterisationService {
     return this.httpClient.get(`${SERVER_POST}fields/information/${id}`);
   }
 
-
+  getTrayectory$(id) {     
+    return this.httpClient.get(`${SERVER_POST}institution/trayectory/${id}`);  
+  }
 
 }
