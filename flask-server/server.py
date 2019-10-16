@@ -3,6 +3,7 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
 from flask_cors import CORS
+from urllib.parse import unquote
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -14,6 +15,8 @@ import consulta
 # Author collaborations
 import authorCollaboration
 
+# Journal Characterization
+from ControllerJournalCharacterization import ControllerJournalCharacterization
 
 
 class HelloWorld(Resource):
@@ -69,6 +72,20 @@ class consultaAlternativeTrayectory(Resource):
         info = consulta.alternative_trayectory(nom)
         return (info)
 
+class QueryJournalsApi(Resource):
+    def get(self, search_value):
+        
+        search_value = unquote(search_value)
+        s_values = search_value.split('>')
+        s_value = s_values[0]
+        s_type = s_values[1]
+
+        controller = ControllerJournalCharacterization('https://github.com/stevenstiven2000/activity-categorization-implementation/blob/master/udea.json?raw=true')
+        journals = controller.update_journals(s_value, s_type)
+        # print(journals)
+        return (journals)
+
+
 # test
 api.add_resource(HelloWorld, '/')
 api.add_resource(Multi, '/multi/<int:num>')
@@ -90,6 +107,9 @@ api.add_resource(consultaAlternativeTrayectory , '/institution/alternativetrayec
 
 api.add_resource(AuthorCollaborationsFindAuthor, '/author-collaboration/<string:nom>')
 
+# Journals Characterization
+
+api.add_resource(QueryJournalsApi, '/journalCharacterisation/<string:search_value>')
 
 
 if __name__=='__main__':
