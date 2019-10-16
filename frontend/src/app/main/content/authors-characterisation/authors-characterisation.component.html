@@ -1,93 +1,144 @@
 <div id="spending_rules" class="page-layout carded fullwidth" fusePerfectScrollbar>
+  <style>
+    body {
+      font-family: "Courier New";
+    }
 
-    <!-- TOP BACKGROUND -->
-    <div class="top-bg mat-accent-bg"></div>
-    <!-- / TOP BACKGROUND -->
+    h1 {
+      font-family: Verdana;
+    }
+  </style>
 
-    <!-- CENTER -->
-    <div class="center">
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg mat-accent-bg"></div>
+  <!-- / TOP BACKGROUND -->
 
-        <!-- HEADER -->
-        <div class="header white-fg" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+  <!-- CENTER -->
+  <div class="center">
 
-            <!-- APP TITLE -->
-            <div class="logo my-12 m-sm-0" fxLayout="row" fxLayoutAlign="start center">
-                <mat-icon class="logo-icon mr-16" *fuseIfOnDom>bookmark</mat-icon>
-                <span class="logo-text h1">Caracterización de autores</span>
-            </div>
-            <!-- / APP TITLE -->
+    <!-- HEADER -->
+    <div class="header white-fg" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+      fxLayoutAlign.gt-xs="space-between center">
 
-            <!-- SEARCH -->
-            <div class="search-input-wrapper mx-12 m-md-0" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
-                <label for="search" class="mr-8">
-                  <mat-icon class="secondary-text">search</mat-icon>
-                </label>
-                <mat-form-field floatPlaceholder="never" fxFlex="1 0 auto">
-                  <input id="search" [formControl]="filterTextControl" matInput placeholder="Autor a consultar">
-                </mat-form-field>
-        
-                <mat-chip-list aria-label="Fish selection">
-                  <mat-chip color="primary" selected>Buscar</mat-chip>
-                </mat-chip-list>
-        
-        
-            </div>
-            <!-- / SEARCH -->
-        </div>
-        <!-- / HEADER -->
+      <!-- APP TITLE -->
+      <div class="logo my-12 m-sm-0" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon mr-16" *fuseIfOnDom>bookmark</mat-icon>
+        <span class="logo-text h1">Caracterización de autores</span>
+      </div>
+      <!-- / APP TITLE -->
 
-        <!-- CONTENT CARD [CODE HERE] -->
-        <div class="content-card mat-white-bg" fusePerfectScrollbar>
+      <!-- SEARCH -->
+      <div class="search-input-wrapper mx-12 m-md-0" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+        <label for="search" class="mr-8">
+          <mat-icon class="secondary-text">search</mat-icon>
+        </label>
+        <mat-form-field floatPlaceholder="never" fxFlex="1 0 auto">
+          <input id="search" [formControl]="filterTextControl" matInput placeholder="Autor a consultar">
+        </mat-form-field>
 
-            <span class="font-size-32">AUTHORS CHARACTERISATION IMPLEMENTATION</span>
-            
-            <!--<mat-chip-list aria-label="Fish selection">
+
+        <!---<mat-chip-list aria-label="Fish selection">
+          <mat-chip (click)="myMethod($event)" color="primary" selected>Buscar</mat-chip>
+        </mat-chip-list> -->
+
+
+
+
+      </div>
+      <!-- / SEARCH -->
+    </div>
+    <!-- / HEADER -->
+
+
+    <!-- CONTENT CARD [CODE HERE] -->
+    <div class="content-card mat-white-bg" fusePerfectScrollbar>
+
+      <br />
+      <p style="font-family:Times New Roman, Times, serif; font-size:40px; font-style:bold; text-align: center;">
+        Lista de coincidencia de autores
+      </p>
+
+
+      <mat-accordion class="example-headers-align" *ngFor="let item of resultList; let i = index">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title style="font-family:Times New Roman, Times, serif; font-size:20px; font-style:bold;">
+              {{item.Nombre}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+
+          Area: {{item.Area}}
+          <br />
+          Institución: {{item.Institucion}}
+
+          <br />
+          <br />
+          <h3 style="font-family:georgia, garamond, serif; font-size: 20px;"> Articulos</h3>
+          <hr />
+          <p *ngFor="let art of item.Articulos">
+            Titulo: {{art.Nombre}} <br />
+            <br />
+            Citas: {{art.NumeroCitas}} <br />
+            <br />
+            ID: {{art.ID}}
+            <br />
+            Año de publicación: {{art.AnioPublicacion}}
+            <br />
+            <br />
+          </p>
+          <hr />
+        </mat-expansion-panel>
+      </mat-accordion>
+
+
+      <!--<mat-chip-list aria-label="Fish selection">
               <mat-chip *ngFor="let item of resultList">
                 {{ item }}
               </mat-chip> 
             </mat-chip-list> -->
-            <mat-accordion class="example-headers-align"  *ngFor="let item of resultList">
-              <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
-                <mat-expansion-panel-header>
-                  <mat-panel-title >
-                    {{item.Nombre}}
-                  </mat-panel-title>
-                  
-                </mat-expansion-panel-header>
-            
-                  Area: {{item.Area}}
-                  <br/>
-                  Institución: {{item.Institucion}}
 
-                  <br/>
-                  <br/>
-                  <h3> Articulos</h3>
-                  <hr/>
-                  <p *ngFor="let art of item.Articulos">
 
-                    ------------------------------------------------------------------------------<br/>
-                    Titulo: {{art.Nombre}} <br />
-                    <br />
-                    Citas: {{art.NumeroCitas}} <br />
-                    <br />
-                    ID: {{art.ID}}
-                    <br/>
-                    <br/>
-                  </p>
-                  <hr/>
+      <!--<mat-accordion class="example-headers-align" *ngFor="let item of resultList">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{item.Nombre}}
+            </mat-panel-title>
 
-            
-                <mat-action-row>
-                  <button mat-button color="primary" (click)="nextStep()">Next</button>
-                </mat-action-row>
-              </mat-expansion-panel>
-            
-              
-            
-            </mat-accordion>
-        </div>
-        
-        <!-- / CONTENT CARD -->
+          </mat-expansion-panel-header>
+
+          Area: {{item.Area}}
+          <br />
+          Institución: {{item.Institucion}}
+
+          <br />
+          <br />
+          <h3> Articulos</h3>
+          <hr />
+          <p *ngFor="let art of item.Articulos">
+
+            ------------------------------------------------------------------------------<br />
+            Titulo: {{art.Nombre}} <br />
+            <br />
+            Citas: {{art.NumeroCitas}} <br />
+            <br />
+            ID: {{art.ID}}
+            <br />
+            <br />
+          </p>
+          <hr />
+
+
+          <mat-action-row>
+            <button mat-button color="primary" (click)="nextStep()">Next</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+
+      </mat-accordion>-->
     </div>
-    <!-- / CENTER -->
+
+    <!-- / CONTENT CARD -->
+  </div>
+  <!-- / CENTER -->
 </div>

@@ -1,18 +1,12 @@
+# -- coding: utf-8 --
+
 import pandas as pd
 import csv
 import numpy as np
 import json
 
 
-
-
-
-
-#import Autor
-#import Articulo
-path='C:\\Users\\alejo\\Documents\\UdeA\\Análisis II\\analisis2\\flask-server\\authorAux\\university_of_antioquia.json'
-
-
+path = 'C:\\Users\\alejo\\Documents\\UdeA\\Análisis II\\analisis2\\flask-server\\authorAux\\university_of_antioquia.json'
 
 
 # Load the first sheet of the JSON file into a data frame
@@ -23,6 +17,7 @@ URL = "C:\\Users\\alejo\\Documents\\UdeA\\Análisis II\\analisis2\\flask-server\
 paises = pd.read_csv(URL)
 paises = paises.set_index('Code').T.to_dict('list')
 paises['XXX'] = 'No_Disponible'
+
 
 class Articulo():
 
@@ -57,46 +52,48 @@ class Articulo():
         self.__id = x
 
     def articuloToDiccionario(self):
-        artDiccionario = {'Nombre': self.__nombre, 'AñoPublicacion': self.__añoPublicacion,
+        artDiccionario = {'Nombre': self.__nombre, 'AnioPublicacion': self.__añoPublicacion,
                           'NumeroCitas': self.__numeroCitas, 'ID': self.__id}
         return artDiccionario
 
+
 class Autor():
-    
+
     def __init__(self, nombre, articulos, area, institucion):
         self.__nombre = str(nombre)
-        self.__articulos = articulos 
+        self.__articulos = articulos
         self.__area = str(area)
         self.__institucion = str(institucion)
 
-
     def get_nombre(self):
         return str(self.__nombre)
-    
+
     def set_nombre(self, x):
         self.__nombre = x
 
     def get_articulos(self):
         return self.__articulos
-    
+
     def set_articulos(self, x):
         self.__articulos = x
-        
+
     def get_area(self):
         return str(self.__area)
-    
+
     def set_area(self, x):
         self.__area = x
-        
+
     def get_institucion(self):
         return str(self.__institucion)
-    
+
     def set_institucion(self, x):
         self.__institucion = x
-    
+
     def autorToDiccionario(self):
-        autorDiccionario = {'Nombre': str(self.__nombre), 'Articulos': self.__articulos, 'Area': str(self.__area), 'Institucion': str(self.__institucion)}
+        autorDiccionario = {'Nombre': str(self.__nombre), 'Articulos': self.__articulos, 'Area': str(
+            self.__area), 'Institucion': str(self.__institucion)}
         return autorDiccionario
+
 
 def consultar(nombre):
     coincidencias = []
@@ -105,7 +102,7 @@ def consultar(nombre):
         for autor in value:
             aux = str(autor['first_name'])+" "+str(autor['last_name'])
             pais = 'XXX'
-            universidad=""
+            universidad = ""
             if (nombre.lower() in aux.lower()):
                 for uni in autor['affiliations']:
                     universidad = uni['name']
@@ -156,8 +153,6 @@ def listarArticulos(arreglo, nombre):
         if (art[1] == nombre):
             articulo = Articulo(art[4], art[5], art[6], art[7])
 
-
             diccionario = articulo.articuloToDiccionario()
             articulosDiccionarios.append(diccionario)
     return articulosDiccionarios
-
