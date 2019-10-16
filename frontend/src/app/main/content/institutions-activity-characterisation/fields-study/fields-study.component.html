@@ -13,7 +13,7 @@
             <!-- APP TITLE -->
             <div class="logo my-12 m-sm-0" fxLayout="row" fxLayoutAlign="start center">
                 <mat-icon class="logo-icon mr-16" *fuseIfOnDom>bookmark</mat-icon>
-                <span class="logo-text h1">Detalle de institución</span>
+                <span class="logo-text h1"></span>
             </div>
             <!-- / APP TITLE -->
         </div>
@@ -26,59 +26,22 @@
         <div class="content-card mat-white-bg" fusePerfectScrollbar>
 
             <div class="container">
-                <div *ngIf="institutioinInfo" class="divTitle">
-                    <h1 class="mainTitle">{{ institutioinInfo.name }}</h1>
-                </div>
+
                 <section class="main row">
                     <article class="col-xs-12 col-sm-7 col-md-8 col-lg-8">
 
                         <div class="contenedorTitulos">
 
-                            <h2>Artículos</h2>
+                            <h2>Instituciones asociadas</h2>
                         </div>
-
-                        <ul *ngIf="institutioinInfo && institutioinInfo.articles" class="list-group list-group-flush">
-                            <div *ngFor="let item of institutioinInfo.articles">
+                        <ul *ngIf="fieldInfo && fieldInfo.institution" class="list-group list-group-flush">
+                            <div *ngFor="let item of fieldInfo.institution">
                                 <li class="list-group-item">{{ item }}</li>
                             </div>
                         </ul>
-                        <br />
-                        <div class="contenedorTitulos">
 
-                            <h2>Campos de estudio:</h2>
-                        </div>
-
-
-                        <ul *ngIf="institutioinInfo && institutioinInfo.topics" class="list-group list-group-flush">
-                            <div *ngFor="let item of institutioinInfo.topics">
-                                <li class="list-group-item">{{ item }}</li>
-                            </div>
-                        </ul>
                     </article>
-                    <aside class="col-xs-12 col-sm-5 col-md-4 col-lg-4">
-
-                        <ul *ngIf="institutioinInfo && institutioinInfo.authors" class="list-group">
-                            <div class="contenedorTitulos">
-                                <h2>Autores</h2>
-                            </div>
-
-                            <div *ngFor="let item of institutioinInfo.authors">
-                                <li class="list-group-item">{{ item }}</li>
-                            </div>
-                        </ul>
-                    </aside>
                 </section>
-
-
-                <div class="flex">
-                    <div class="flex-item">
-                        <div style="display: block;">
-                            <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType">
-                            </canvas>
-                        </div>
-                    </div>
-
-                </div>
                 <!-- / CONTENT CARD -->
             </div>
             <!-- / CENTER -->
