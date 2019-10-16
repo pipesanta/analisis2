@@ -4,8 +4,6 @@
     <div class="top-bg mat-accent-bg"></div>
     <!-- / TOP BACKGROUND -->
 
-
-
     <!-- CENTER -->
     <div class="center">
 
@@ -15,39 +13,74 @@
             <!-- APP TITLE -->
             <div class="logo my-12 m-sm-0" fxLayout="row" fxLayoutAlign="start center">
                 <mat-icon class="logo-icon mr-16" *fuseIfOnDom>bookmark</mat-icon>
-                <span class="logo-text h1">Caracterización de instituciones</span>
+                <span class="logo-text h1">Detalle de institución</span>
             </div>
             <!-- / APP TITLE -->
-
-            <!-- SEARCH -->
-            <div class="search-input-wrapper mx-12 m-md-0" fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
-                <label for="search" class="mr-8">
-              <mat-icon class="secondary-text">search</mat-icon>
-            </label>
-                <mat-form-field floatPlaceholder="never" fxFlex="1 0 auto">
-                    <input id="search" [formControl]="filterTextControl" matInput placeholder="Búsqueda">
-                </mat-form-field>
-
-                <mat-radio-group aria-label="Select an option">
-                    <mat-radio-button value="1" color="warm">Institución</mat-radio-button>
-                    <mat-radio-button value="2">Campo de estudio</mat-radio-button>
-                </mat-radio-group>
-
-
-            </div>
-            <!-- / SEARCH -->
         </div>
         <!-- / HEADER -->
 
         <!-- CONTENT CARD [CODE HERE]  -->
+
+
+
         <div class="content-card mat-white-bg" fusePerfectScrollbar>
-            <div class="list-group">
-                <div *ngFor="let item of institutionList" (click)="navigateToDetail(item)" class="bordecito">
-                    <a style="text-decoration:none " class="list-group-item list-group-item-action"><span class="institution">{{ item }}</span></a>
+
+            <div class="container">
+                <div *ngIf="institutioinInfo" class="divTitle">
+                    <h1 class="mainTitle">{{ institutioinInfo.name }}</h1>
                 </div>
+                <section class="main row">
+                    <article class="col-xs-12 col-sm-7 col-md-8 col-lg-8">
+
+                        <div class="contenedorTitulos">
+
+                            <h2>Artículos</h2>
+                        </div>
+
+                        <ul *ngIf="institutioinInfo && institutioinInfo.articles" class="list-group list-group-flush">
+                            <div *ngFor="let item of institutioinInfo.articles">
+                                <li class="list-group-item">{{ item }}</li>
+                            </div>
+                        </ul>
+                        <br />
+                        <div class="contenedorTitulos">
+
+                            <h2>Campos de estudio:</h2>
+                        </div>
+
+
+                        <ul *ngIf="institutioinInfo && institutioinInfo.topics" class="list-group list-group-flush">
+                            <div *ngFor="let item of institutioinInfo.topics">
+                                <li class="list-group-item">{{ item }}</li>
+                            </div>
+                        </ul>
+                    </article>
+                    <aside class="col-xs-12 col-sm-5 col-md-4 col-lg-4">
+
+                        <ul *ngIf="institutioinInfo && institutioinInfo.authors" class="list-group">
+                            <div class="contenedorTitulos">
+                                <h2>Autores</h2>
+                            </div>
+
+                            <div *ngFor="let item of institutioinInfo.authors">
+                                <li class="list-group-item">{{ item }}</li>
+                            </div>
+                        </ul>
+                    </aside>
+                </section>
+
+
+                <div class="flex">
+                    <div class="flex-item">
+                        <div style="display: block;">
+                            <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType">
+                            </canvas>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- / CONTENT CARD -->
             </div>
+            <!-- / CENTER -->
         </div>
-        <!-- / CONTENT CARD -->
     </div>
-    <!-- / CENTER -->
-</div>

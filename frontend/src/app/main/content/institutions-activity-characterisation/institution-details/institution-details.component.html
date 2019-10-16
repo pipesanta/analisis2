@@ -8,8 +8,7 @@
     <div class="center">
 
         <!-- HEADER -->
-        <div class="header white-fg" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
-            fxLayoutAlign.gt-xs="space-between center">
+        <div class="header white-fg" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
 
             <!-- APP TITLE -->
             <div class="logo my-12 m-sm-0" fxLayout="row" fxLayoutAlign="start center">
@@ -74,11 +73,7 @@
                 <div class="flex">
                     <div class="flex-item">
                         <div style="display: block;">
-                            <canvas baseChart width="400" height="400" [datasets]="lineChartData"
-                                [labels]="lineChartLabels" [options]="lineChartOptions"
-                                [colors]="lineChartColors" 
-                                [legend]="lineChartLegend" [chartType]="lineChartType"
-                                (chartHover)="chartHovered($event)">
+                            <canvas baseChart width="400" height="400" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType">
                             </canvas>
                         </div>
                     </div>
@@ -88,3 +83,4 @@
             </div>
             <!-- / CENTER -->
         </div>
+    </div>

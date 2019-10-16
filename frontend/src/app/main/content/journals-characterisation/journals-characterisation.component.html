@@ -50,27 +50,45 @@
             
           </mat-expansion-panel-header>
       
-            Area: {{item.publisher}}
-            <br/>
-            Institución: {{item.country}}
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
 
-            <br/>
-            <br/>
-            <h3> Articulos</h3>
-            <hr/>
-            <p *ngFor="let art of item.Articulos">
-
-              ------------------------------------------------------------------------------<br/>
-              Titulo: {{art.name}} <br />
+            <mat-expansion-panel-header>
+                <mat-panel-title >
+                    <h3> Volumes</h3>
+                </mat-panel-title>
+                
+              </mat-expansion-panel-header>
+          
+          <hr/>
+          <div *ngFor="let volume of item.volumes">
+            <p></p>
+            Volumen: {{volume.volume}} <br />
+            <br />
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+              <mat-expansion-panel-header>
+                  <mat-panel-title >
+                      <h4>Issues</h4>
+                  </mat-panel-title>  
+                </mat-expansion-panel-header>
+              <div *ngFor="let iss of volume.issues">
+                 Issue: {{iss.issue}} <br />
+                 <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title >
+                            <h4>Articles</h4>
+                        </mat-panel-title>  
+                      </mat-expansion-panel-header>
+                    <p></p>
+                    <div *ngFor="let art of iss.articles">
+                      Article: {{art}} <br />
+                    </div>
+                  </mat-expansion-panel>
+                </div>
               <br />
-              Citas: {{art.NumeroCitas}} <br />
-              <br />
-              ID: {{art.ID}}
               <br/>
-              <br/>
-            </p>
-            <hr/>
-
+            </mat-expansion-panel>  
+            </div>      
+          </mat-expansion-panel>
       
           <mat-action-row>
             <button mat-button color="primary" (click)="nextStep()">Next</button>
