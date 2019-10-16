@@ -4,6 +4,8 @@ import { FormControl } from '@angular/forms';
 import { filter, tap, mergeMap, debounceTime, map } from 'rxjs/operators';
 import { AuthorColaborationsService } from './author-colaborations.service';
 
+import { ChartType, ChartOptions } from 'chart.js';
+
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'author-colaborations',
@@ -18,10 +20,50 @@ export class AuthorColaborationsComponent implements OnInit, OnDestroy {
 
 
 
-  // chart
+  // chart 01
 
 
-  // chart
+  doughnutChartLabels = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
+  doughnutChartData =  [
+    [350, 450, 100],
+    [50, 150, 120],
+    [250, 130, 70],
+  ];
+  doughnutChartType: ChartType = 'doughnut';
+
+  // chart 01
+
+  // char 02
+
+
+  // Pie
+  public pieChartOptions = {
+    responsive: true,
+    legend: {
+      position: 'top',
+    },
+    plugins: {
+      datalabels: {
+        formatter: (value, ctx) => {
+          const label = ctx.chart.data.labels[ctx.dataIndex];
+          return label;
+        },
+      },
+    }
+  };
+  public pieChartLabels = [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'];
+  public pieChartData: number[] = [300, 500, 100];
+  public pieChartType: ChartType = 'pie';
+  public pieChartLegend = true;
+  // public pieChartPlugins = [pluginDataLabels];
+  public pieChartColors = [
+    {
+      backgroundColor: ['rgba(255,0,0,0.3)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)'],
+    },
+  ];
+
+
+  // chart02
 
 
   constructor(
@@ -30,8 +72,22 @@ export class AuthorColaborationsComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnInit() {
+  ngOnInit() {  
+
     this.listenSearchbar(); // inicia el escuchador observador
+
+
+
+
+  }
+
+   // events
+  chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
+  }
+
+  chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+    console.log(event, active);
   }
 
 

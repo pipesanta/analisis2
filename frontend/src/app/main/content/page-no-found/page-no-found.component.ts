@@ -46,7 +46,7 @@ export class PageNoFoundComponent implements OnInit, OnDestroy {
   ],
     // These labels appear in the legend and in the tooltips when hovering different arcs
     labels: [
-        // 'Red',
+        // 'computadores',
         // 'Yellow',
         // 'Blue'
     ]

@@ -41,13 +41,45 @@
     <!-- CONTENT CARD [CODE HERE]  -->
     <div class="content-card mat-white-bg">
 
-      <span class="font-size-32">journals-characterisation</span>
+      <mat-accordion class="example-headers-align"  *ngFor="let item of resultList">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title >
+              {{item.title_full}}
+            </mat-panel-title>
+            
+          </mat-expansion-panel-header>
+      
+            Area: {{item.publisher}}
+            <br/>
+            Institución: {{item.country}}
 
-      <mat-chip-list aria-label="Fish selection">
-        <mat-chip *ngFor="let item of resultList">
-          {{ item.name }}
-        </mat-chip>
-      </mat-chip-list>
+            <br/>
+            <br/>
+            <h3> Articulos</h3>
+            <hr/>
+            <p *ngFor="let art of item.Articulos">
+
+              ------------------------------------------------------------------------------<br/>
+              Titulo: {{art.name}} <br />
+              <br />
+              Citas: {{art.NumeroCitas}} <br />
+              <br />
+              ID: {{art.ID}}
+              <br/>
+              <br/>
+            </p>
+            <hr/>
+
+      
+          <mat-action-row>
+            <button mat-button color="primary" (click)="nextStep()">Next</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      
+        
+      
+      </mat-accordion>
     </div>
     <!-- / CONTENT CARD -->
   </div>

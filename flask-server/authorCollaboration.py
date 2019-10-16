@@ -79,6 +79,7 @@ def buildArticle(index):
   
   mainAuthorName = mainAuthorRef["first_name"] or ""
   mainAuthorSurname = mainAuthorRef["last_name"] or ""
+
   try:
     mainAuthorCountry = mainAuthorRef["affiliations"][0]["grid"]["addresses"][0]["country_code"]
   except:
