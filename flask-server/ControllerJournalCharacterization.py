@@ -31,7 +31,7 @@ class ControllerJournalCharacterization:
             self.__volume_list.append(temp_volume)
         for article in self.__article_list:
             for temp_volume in self.__volume_list:
-                if temp_volume['volume'] == str(article['volume']):
+                if str(temp_volume['volume']) == str(article['volume']):
                     temp_volume['issues'].append(str(article['issue']))
         for temp_volume in self.__volume_list:
             temp_issues = temp_volume['issues']
