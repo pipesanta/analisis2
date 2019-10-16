@@ -1,0 +1,74 @@
+@import "src/app/core/scss/fuse";
+:host {
+    .header {
+        .search-input-wrapper {
+            max-width: 480px;
+        }
+        @include media-breakpoint-down(xs) {
+            height: 176px !important;
+            min-height: 176px !important;
+            max-height: 176px !important;
+        }
+    }
+    .top-bg {
+        @include media-breakpoint-down(xs) {
+            height: 240px;
+        }
+    }
+}
+
+.mainTitle {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.red-text {
+    color: red;
+}
+
+h2 {
+    font-weight: bold;
+}
+
+.divTitle {
+    padding: 40px;
+}
+
+.institutionItem {
+    padding: 3px;
+    border: 1px solid;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.encabezado {
+    background: #452745;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.main {
+    background: #f2f2f2;
+    margin-bottom: 20px;
+}
+
+.widgets {
+    margin-bottom: 20px;
+}
+
+.widget {
+    background: #f2f2f2;
+}
+
+.color {
+    background: #d2d2d2;
+}
+
+footer {
+    background: #452745;
+    color: #fff;
+}
+
+.contenedorTitulos {
+    padding: 10px;
+}
